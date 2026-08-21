@@ -108,9 +108,10 @@ function getImageSrc(img: unknown): string | undefined {
 			gallery && gallery.length > 0 && (
 				<div class="project-gallery">
 					{gallery.map((img) => (
-						<div class="gallery-item">
+						<figure class="gallery-item">
 							<img src={img.url} alt={img.alt || ""} loading="lazy" />
-						</div>
+							{img.alt && <figcaption>{img.alt}</figcaption>}
+						</figure>
 					))}
 				</div>
 			)
@@ -261,6 +262,13 @@ function getImageSrc(img: unknown): string | undefined {
 		width: 100%;
 		height: auto;
 		border-radius: var(--radius);
+	}
+
+	.gallery-item figcaption {
+		margin-top: var(--spacing-sm);
+		font-size: var(--font-size-sm);
+		line-height: var(--leading-normal);
+		color: var(--color-muted);
 	}
 
 	.more-projects {
