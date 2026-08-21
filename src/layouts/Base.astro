@@ -11,9 +11,10 @@ interface Props {
 	description?: string;
 	image?: string;
 	type?: "website" | "article";
+	variant?: "default" | "paper";
 }
 
-const { title, description, image, type = "website" } = Astro.props;
+const { title, description, image, type = "website", variant = "default" } = Astro.props;
 const settings = await getSiteSettings();
 const siteTitle = settings?.title || "Studio";
 const fullTitle = title ? `${title} — ${siteTitle}` : siteTitle;
@@ -64,7 +65,12 @@ const pageCtx = createPublicPageContext({
 			})();
 		</script>
 	</head>
-	<body>
+	<body class:list={{ "paper-shell": variant === "paper" }}>
+		{
+			variant === "paper" && (
+				<a class="skip-link" href="#main-content">Skip to content</a>
+			)
+		}
 		<header class="site-header">
 			<nav class="nav">
 				<a href="/" class="site-title">
@@ -85,7 +91,7 @@ const pageCtx = createPublicPageContext({
 			</nav>
 		</header>
 
-		<main>
+		<main id="main-content">
 			<slot />
 		</main>
 
@@ -391,6 +397,60 @@ const pageCtx = createPublicPageContext({
 				text-decoration: underline;
 			}
 
+			.paper-shell .skip-link {
+				position: fixed;
+				top: var(--spacing-sm);
+				left: var(--spacing-sm);
+				z-index: 1;
+				padding: var(--spacing-sm) var(--spacing-md);
+				background: var(--color-text);
+				color: var(--color-bg);
+				text-decoration: none;
+				transform: translateY(-200%);
+			}
+
+			.paper-shell .skip-link:focus {
+				transform: translateY(0);
+			}
+
+			.paper-shell .site-header,
+			.paper-shell .site-footer {
+				max-width: 52rem;
+			}
+
+			.paper-shell .site-header {
+				padding-top: var(--spacing-lg);
+				padding-bottom: var(--spacing-lg);
+				border-bottom: 1px solid var(--color-border);
+			}
+
+			.paper-shell .nav {
+				display: grid;
+				grid-template-columns: 1fr auto 1fr;
+			}
+
+			.paper-shell .site-title {
+				font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+				font-size: var(--font-size-base);
+				font-weight: 700;
+			}
+
+			.paper-shell .nav-links {
+				grid-column: 2;
+				gap: var(--spacing-lg);
+				font-weight: 600;
+			}
+
+			.paper-shell .site-footer {
+				padding-top: var(--spacing-xl);
+				padding-bottom: var(--spacing-xl);
+			}
+
+			.paper-shell .footer-tagline,
+			.paper-shell .footer-powered {
+				font-size: var(--font-size-xs);
+			}
+
 			@media (max-width: 640px) {
 				.nav {
 					flex-direction: column;
@@ -412,6 +472,14 @@ const pageCtx = createPublicPageContext({
 
 				.footer-right {
 					align-items: center;
+				}
+
+				.paper-shell .nav {
+					display: flex;
+				}
+
+				.paper-shell .nav-links {
+					grid-column: auto;
 				}
 
 				h1 {
