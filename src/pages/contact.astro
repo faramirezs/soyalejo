@@ -1,0 +1,132 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+	title="Contact"
+	description="Contact Alejandro Ramírez about automation, integration, and internal-tools engineering work."
+>
+	<div class="contact-page">
+		<header class="contact-header">
+			<h1 class="contact-title">Build the awkward integration.</h1>
+			<p class="contact-intro">
+				I am interested in Automation &amp; Integrations Engineer, Business Systems Engineer,
+				Internal Tools Engineer, and Backend &amp; Integrations Engineer roles.
+			</p>
+			<a class="contact-cta" href="mailto:faramirezs@gmail.com">Email Alejandro →</a>
+		</header>
+
+		<aside class="contact-info" aria-label="Contact details">
+			<div class="info-section">
+				<h2>Email</h2>
+				<p><a href="mailto:faramirezs@gmail.com">faramirezs@gmail.com</a></p>
+			</div>
+			<div class="info-section">
+				<h2>Location</h2>
+				<p>Berlin, Germany</p>
+			</div>
+			<div class="info-section">
+				<h2>Profiles</h2>
+				<ul class="profile-links">
+					<li>
+						<a href="https://github.com/faramirezs" target="_blank" rel="noopener noreferrer">GitHub</a>
+					</li>
+					<li>
+						<a href="https://www.linkedin.com/in/alejandro-mlops-engineer/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+	</div>
+</Base>
+
+<style>
+	.contact-page {
+		max-width: var(--wide-width);
+		margin: 0 auto;
+		padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-4xl);
+	}
+
+	.contact-header {
+		max-width: var(--max-width);
+		padding-bottom: var(--spacing-3xl);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.contact-title {
+		font-family: var(--font-heading);
+		font-size: var(--font-size-4xl);
+		font-weight: var(--font-weight-display);
+		line-height: var(--leading-tight);
+		margin-bottom: var(--spacing-lg);
+	}
+
+	.contact-intro {
+		font-size: var(--font-size-lg);
+		line-height: var(--leading-normal);
+		color: var(--color-muted);
+		margin-bottom: var(--spacing-xl);
+	}
+
+	.contact-cta {
+		display: inline-block;
+		font-family: var(--font-heading);
+		font-size: var(--font-size-lg);
+		text-decoration: none;
+		color: var(--color-brand);
+	}
+
+	.contact-cta:hover {
+		color: var(--color-text);
+	}
+
+	.contact-info {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--spacing-2xl);
+		padding-top: var(--spacing-3xl);
+	}
+
+	.info-section h2 {
+		font-family: var(--font-heading);
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-heading);
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.info-section p,
+	.info-section a {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+	}
+
+	.info-section a {
+		text-decoration: none;
+	}
+
+	.info-section a:hover {
+		color: var(--color-text);
+	}
+
+	.profile-links {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-sm);
+	}
+
+	@media (max-width: 768px) {
+		.contact-page {
+			padding-top: var(--spacing-2xl);
+		}
+
+		.contact-title {
+			font-size: var(--font-size-3xl);
+		}
+
+		.contact-info {
+			grid-template-columns: 1fr;
+			gap: var(--spacing-xl);
+		}
+	}
+</style>

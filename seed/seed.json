@@ -1,0 +1,257 @@
+{
+  "$schema": "https://emdashcms.com/seed.schema.json",
+  "version": "1",
+  "meta": {
+    "name": "Alejandro Ramírez — Automation & Integrations",
+    "description": "Case studies in automation, integrations, accounting systems, and open source.",
+    "author": "Alejandro Ramírez"
+  },
+  "settings": {
+    "title": "Alejandro Ramírez",
+    "tagline": "Automation & Integrations Engineer"
+  },
+  "collections": [
+    {
+      "slug": "projects",
+      "label": "Case Studies",
+      "labelSingular": "Case Study",
+      "supports": ["drafts", "revisions", "search", "seo"],
+      "fields": [
+        { "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+        { "slug": "featured_image", "label": "Featured Image", "type": "image", "required": true },
+        { "slug": "client", "label": "Context", "type": "string" },
+        { "slug": "year", "label": "Year", "type": "string" },
+        { "slug": "summary", "label": "Summary", "type": "text", "searchable": true },
+        { "slug": "content", "label": "Content", "type": "portableText", "searchable": true },
+        { "slug": "gallery", "label": "Gallery", "type": "json" },
+        { "slug": "url", "label": "Project URL", "type": "string" }
+      ]
+    },
+    {
+      "slug": "pages",
+      "label": "Pages",
+      "labelSingular": "Page",
+      "supports": ["drafts", "revisions", "search"],
+      "fields": [
+        { "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+        { "slug": "content", "label": "Content", "type": "portableText", "searchable": true }
+      ]
+    }
+  ],
+  "taxonomies": [
+    {
+      "name": "category",
+      "label": "Categories",
+      "labelSingular": "Category",
+      "hierarchical": false,
+      "collections": ["projects"],
+      "terms": [
+        { "slug": "automation-integrations", "label": "Automation & Integrations" },
+        { "slug": "accounting-systems", "label": "Accounting Systems" },
+        { "slug": "open-source", "label": "Open Source" }
+      ]
+    },
+    {
+      "name": "tag",
+      "label": "Technologies",
+      "labelSingular": "Technology",
+      "hierarchical": false,
+      "collections": ["projects"],
+      "terms": [
+        { "slug": "make", "label": "Make" },
+        { "slug": "n8n", "label": "n8n" },
+        { "slug": "airtable", "label": "Airtable" },
+        { "slug": "api-integration", "label": "API integration" },
+        { "slug": "document-processing", "label": "Document processing" },
+        { "slug": "reliability", "label": "Reliability" },
+        { "slug": "accounting", "label": "Accounting" },
+        { "slug": "rust", "label": "Rust" },
+        { "slug": "streaming", "label": "Streaming systems" }
+      ]
+    }
+  ],
+  "menus": [
+    {
+      "name": "primary",
+      "label": "Primary Navigation",
+      "items": [
+        { "type": "custom", "label": "Case Studies", "url": "/work" },
+        { "type": "custom", "label": "About", "url": "/about" },
+        { "type": "custom", "label": "Contact", "url": "/contact" }
+      ]
+    }
+  ],
+  "content": {
+    "pages": [
+      {
+        "id": "about",
+        "slug": "about",
+        "status": "published",
+        "data": {
+          "title": "About",
+          "content": [
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "I am an Automation & Integrations Engineer who turns manual operations into reliable, traceable systems." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "I work across APIs, Make, n8n, Python, and data workflows. I start with the operational bottleneck, connect the systems, make failure states visible, and hand over a workflow people can use." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Where I do my best work" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "I grow fastest in teams that give me ownership of a difficult system gap. My strongest work sits between business operations and engineering: accounting flows, CRM and customer journeys, document processing, API integrations, and internal tools." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Proof" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "At JurisDATA, I connected SEO demand to automated case intake and guidance for more than 50,000 people. At Ko Kitchen, I build accounting, invoice, and operations automation. I also contribute production Rust code to open source." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Best-fit roles: Automation & Integrations Engineer, Business Systems Engineer, Internal Tools Engineer, and Backend & Integrations Engineer." }] }
+          ]
+        }
+      }
+    ],
+    "projects": [
+      {
+        "id": "jurisdata-ticket-intake",
+        "slug": "jurisdata-ticket-intake",
+        "status": "published",
+        "data": {
+          "title": "From SEO traffic to case-specific guidance",
+          "client": "JurisDATA",
+          "year": "2019–2022",
+          "summary": "A Make-based system connected an SEO article, SIMIT ticket data, Airtable, deterministic routes, and WhatsApp delivery to help more than 50,000 people.",
+          "featured_image": { "$media": { "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=900&fit=crop", "alt": "Abstract data visualisation used as a cover image", "filename": "jurisdata-data-cover.jpg" } },
+          "url": "https://jurisdata.me/posts/tumbar-fotomulta",
+          "content": [
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The problem" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "A high-ranking article about photo-enforced traffic tickets brought people to JurisDATA. General information was useful, but each visitor needed a next step based on their own ticket data." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The system" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Make coordinated intake, SIMIT retrieval through Bright Data, Airtable CRM records, classified guidance routes, Hookdeck webhook monitoring, and Twilio WhatsApp and email delivery. The SIMIT ingestion route handled both returned records and valid no-record outcomes." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "A second Make scenario received a predefined classification from Fluent CRM, normalised Colombian phone numbers, and selected one of four approved WhatsApp paths. The routing was deterministic. It was not a generic autoresponder." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "What made it reliable" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The workflow kept a clean relationship between a person, a ticket-assessment record, a SIMIT result, and a delivery route. It also treated CAPTCHA input, pagination, missing records, data normalisation, and webhook visibility as explicit workflow states." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Outcome" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The system helped more than 50,000 people move from a generic search result to case-specific ticket information and approved next-step guidance." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "This public case study deliberately excludes personal data, raw SIMIT records, legal-message copy, credential details, and decision-rule content." }] }
+          ]
+        },
+        "taxonomies": { "category": ["automation-integrations"], "tag": ["make", "airtable", "api-integration", "reliability"] }
+      },
+      {
+        "id": "hamberger-invoices-lexware",
+        "slug": "hamberger-invoices-lexware",
+        "status": "published",
+        "data": {
+          "title": "From supplier PDF to an idempotent Lexware invoice",
+          "client": "Ko Kitchen",
+          "year": "2026",
+          "summary": "An n8n workflow reads Hamberger supplier PDFs from Google Drive, preserves printed 7% and 19% tax buckets, creates the right Lexware document once, and attaches the source PDF.",
+          "featured_image": { "$media": { "url": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=900&fit=crop", "alt": "Document and calculator used as a cover image", "filename": "hamberger-invoice-cover.jpg" } },
+          "url": "https://github.com/faramirezs/hamberger-dl",
+          "content": [
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The problem" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Supplier invoices arrived as PDFs. The manual path was repetitive: find the file, read the invoice, enter tax values, create a purchase document, and attach the original PDF. Repeating it by hand creates both delay and accounting risk." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The workflow" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The n8n workflow lists matching PDFs in Google Drive and processes one file at a time. It extracts text, finds the invoice number, prefers the delivery date, parses German-formatted amounts, and uses the final footer rows because earlier pages contain running totals." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "It creates separate 7% and 19% tax buckets from the printed document. It also detects a credit note from the document text or negative final amount, preserves its reference remark, and builds the corresponding Lexware payload." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The idempotency rule" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Before writing, the workflow queries Lexware by voucher number. No matching document means create the voucher, then re-download and upload the PDF. An existing document does not create a duplicate. The workflow can instead fill in a missing PDF attachment when needed." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Why this matters" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The valuable pattern is not PDF text extraction alone. It is a document pipeline that preserves the supplier’s printed totals, maps the result to the correct accounting type, avoids duplicate writes, and keeps the source evidence with the accounting record." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The public GitHub CLI, hamberger-dl, solves the earlier download problem. The n8n flow then takes already-downloaded invoices through accounting ingestion." }] }
+          ]
+        },
+        "taxonomies": { "category": ["accounting-systems"], "tag": ["n8n", "document-processing", "accounting", "reliability"] }
+      },
+      {
+        "id": "sumup-lexware-fail-closed",
+        "slug": "sumup-lexware-fail-closed",
+        "status": "published",
+        "data": {
+          "title": "Accounting automation that refuses to guess",
+          "client": "Ko Kitchen",
+          "year": "2026",
+          "summary": "A fail-closed n8n system reconciles daily SumUp activity before it creates or verifies the matching Lexware revenue documents.",
+          "featured_image": { "$media": { "url": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&h=900&fit=crop", "alt": "Accounting desk used as a cover image", "filename": "sumup-lexware-cover.jpg" } },
+          "content": [
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The accounting constraint" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Payment data and accounting records were disconnected. A fast automation that posts the wrong document is worse than manual work, so the system had to prove a day before it could write it." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "One business day at a time" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "A month-bound driver sends exactly one business date to an inventory workflow. Inventory combines a control source, SumUp evidence, and a Lexware same-day scan. It persists the day state, transaction records, an immutable batch manifest, and a run log before a worker is allowed to post." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The write boundary" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The day worker processes cash and card legs serially. For each one it looks up an exact planned number, checks for same-day collisions, recovers any stored document ID, writes only when needed, and reads the result back to verify it." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Online invoices and credit notes follow a separate exception worker. Each document carries a unique marker so a stopped run can resume without a blind repost." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Fail closed by design" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Missing evidence, a payout mismatch, unexpected source data, duplicate candidates, and uncertain POST outcomes block the day for review. Terminal days are safe no-ops on re-run. The goal is not maximum throughput. The goal is correct, traceable accounting." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Reusable lesson" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "For financial integrations, use persisted state, immutable plans, idempotency markers, collision checks, and read-back verification. They make an automation operable when an API rate limit or a mid-run failure interrupts the happy path." }] }
+          ]
+        },
+        "taxonomies": { "category": ["accounting-systems"], "tag": ["n8n", "api-integration", "accounting", "reliability"] }
+      },
+      {
+        "id": "payout-evidence-attachments",
+        "slug": "payout-evidence-attachments",
+        "status": "published",
+        "data": {
+          "title": "Payout evidence belongs with the voucher",
+          "client": "Ko Kitchen",
+          "year": "2026",
+          "summary": "A scheduled n8n workflow matches payout PDFs to Lexware card vouchers, handles ambiguity explicitly, and records every attachment result.",
+          "featured_image": { "$media": { "url": "https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=1200&h=900&fit=crop", "alt": "Stacked paper documents used as a cover image", "filename": "payout-evidence-cover.jpg" } },
+          "content": [
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The gap after posting" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "A posted card voucher is easier to review when its original SumUp payout report sits beside it. Without that attachment, a later accountant has to search another system and reconstruct the link manually." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The scheduled workflow" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Every morning, the workflow reads the attachment work set, builds one item per expected voucher, and checks the live Lexware voucher before it changes anything. Already-attached evidence is recorded and skipped." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "A matching rule identifies the correct Google Drive payout PDF. No match and ambiguous match are separate outcomes. Neither case should silently attach the wrong document." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Controlled write" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "A dry-run route can record a successful match without an upload. A real run paces Lexware requests, downloads the PDF, uploads it to the expected voucher, verifies that the API returned a file identifier, and records either ATTACHED or ATTACH_FAILED." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Reusable lesson" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Document automation is an evidence problem. Make matching rules explicit, preserve ambiguity as a review state, separate dry runs from real writes, rate-limit external APIs, and record the outcome for every work item." }] }
+          ]
+        },
+        "taxonomies": { "category": ["accounting-systems"], "tag": ["n8n", "document-processing", "accounting", "reliability"] }
+      },
+      {
+        "id": "iii-opencode-go-provider",
+        "slug": "iii-opencode-go-provider",
+        "status": "published",
+        "data": {
+          "title": "My first merged open-source contribution: a streaming LLM provider",
+          "client": "iii-hq/workers",
+          "year": "2026",
+          "summary": "A merged Rust worker added OpenCode Go Chat Completions, SSE streaming, model discovery, tool calls, structured output, and router integration to iii.",
+          "featured_image": { "$media": { "url": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&h=900&fit=crop", "alt": "Source code on a screen used as a cover image", "filename": "iii-opencode-go-cover.jpg" } },
+          "url": "https://github.com/iii-hq/workers/pull/690",
+          "content": [
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The contribution" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "My first merged open-source contribution added provider-opencode-go to iii-hq/workers. It lets the llm-router route Chat Completions requests to an OpenCode Go subscription." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Technical scope" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "I built the Rust worker around the existing provider scaffold, while removing OpenAI-only surfaces that the upstream API did not support. The worker handles SSE streaming, cancellation, live model discovery, curated capabilities, reasoning-effort mapping, tool calls, structured output, credential resolution, and provider re-registration." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Review and verification" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The pull request was approved and merged after review. The final work included formatter and linter checks, 68 passing tests across unit, schema, golden, and integration coverage, a release build, stubbed end-to-end engine tests, and a live smoke test against the upstream subscription." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "What I learned" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "A serious open-source contribution is more than adding a feature. It means adapting to project conventions, accepting review feedback, narrowing scope when an upstream API differs, documenting operational behaviour, and proving the worker works at the protocol boundary." }] }
+          ]
+        },
+        "taxonomies": { "category": ["open-source"], "tag": ["rust", "streaming", "api-integration", "reliability"] }
+      }
+      ,
+      {
+        "id": "hamberger-dl",
+        "slug": "hamberger-dl",
+        "status": "published",
+        "data": {
+          "title": "A CLI for a supplier portal built for clicks",
+          "client": "Open source",
+          "year": "2026",
+          "summary": "A public command-line tool lists and downloads Hamberger supplier PDFs with OIDC login, secure token caching, filters, ZIP export, and safe re-runs.",
+          "featured_image": { "$media": { "url": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=900&fit=crop", "alt": "Circuit board used as a developer-tools cover image", "filename": "hamberger-dl-cover.jpg" } },
+          "url": "https://github.com/faramirezs/hamberger-dl",
+          "content": [
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The gap" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Supplier invoices lived behind a customer portal designed for interactive clicks. Downloading a month of PDFs was routine work, but browser automation would have been fragile and storing a password would have been the wrong security model." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The tool" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "hamberger-dl is a public CLI that uses OpenID Connect, caches tokens securely, and works against the portal’s API. It can list documents, filter by date or type, download PDFs, and package a batch as a ZIP." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Operational design" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The command is safe to run again. Existing files are skipped instead of downloaded again, so an interrupted batch can resume without human bookkeeping. That behavior makes it useful as both a direct operator tool and a dependable upstream step for document-processing workflows." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The repository is public. The downstream accounting configuration is intentionally not: it contains private financial records and vendor-specific integration details." }] }
+          ]
+        },
+        "taxonomies": { "category": ["automation-integrations"], "tag": ["api-integration", "document-processing", "reliability"] }
+      }
+    ]
+  }
+}
