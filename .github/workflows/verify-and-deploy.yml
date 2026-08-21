@@ -58,10 +58,13 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             docker build --tag soyalejo:latest .
+            touch /opt/soyalejo/runtime/data.db-wal /opt/soyalejo/runtime/data.db-shm
             # The production CMS database is authoritative after initial seeding.
             docker stop soyalejo || true
             if ! docker run --rm \
               -v /opt/soyalejo/runtime/data.db:/app/data.db \
+              -v /opt/soyalejo/runtime/data.db-wal:/app/data.db-wal \
+              -v /opt/soyalejo/runtime/data.db-shm:/app/data.db-shm \
               -v /opt/soyalejo/runtime/uploads:/app/uploads \
               soyalejo:latest npx emdash seed seed/seed.json --on-conflict skip; then
               docker start soyalejo || true
@@ -75,6 +78,8 @@ jobs:
               --network-alias soyalejo \
               -e EMDASH_SITE_URL=https://soyalejo.com \
               -v /opt/soyalejo/runtime/data.db:/app/data.db \
+              -v /opt/soyalejo/runtime/data.db-wal:/app/data.db-wal \
+              -v /opt/soyalejo/runtime/data.db-shm:/app/data.db-shm \
               -v /opt/soyalejo/runtime/uploads:/app/uploads \
               soyalejo:latest
             docker image prune --all --force
