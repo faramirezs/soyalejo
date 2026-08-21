@@ -1,6 +1,8 @@
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 import { defineConfig, fontProviders } from "astro/config";
+import { unified } from "@astrojs/markdown-remark";
+import rehypeCallouts from "rehype-callouts";
 import emdash, { local } from "emdash/astro";
 import { sqlite } from "emdash/db";
 
@@ -26,11 +28,18 @@ export default defineConfig({
 	fonts: [
 		{
 			provider: fontProviders.google(),
-			name: "Playfair Display",
-			cssVariable: "--font-heading",
-			weights: [400, 500, 600, 700],
-			fallbacks: ["serif"],
+			name: "Google Sans Code",
+			cssVariable: "--font-app",
+			weights: [300, 400, 500, 600, 700],
+			styles: ["normal", "italic"],
+			formats: ["woff", "ttf"],
+			fallbacks: ["monospace"],
 		},
 	],
+	markdown: {
+		processor: unified({
+			rehypePlugins: [rehypeCallouts],
+		}),
+	},
 	devToolbar: { enabled: false },
 });

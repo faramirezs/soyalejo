@@ -18,24 +18,25 @@ import Base from "../layouts/Base.astro";
 	.not-found {
 		text-align: center;
 		padding: var(--spacing-4xl) var(--spacing-lg);
-		max-width: var(--max-width);
+		max-width: 52rem;
 		margin: 0 auto;
 	}
 
 	.not-found-code {
 		display: block;
-		font-family: var(--font-heading);
+		font-family: var(--font-body);
 		font-size: 8rem;
-		font-weight: var(--font-weight-display);
+		font-weight: 700;
 		line-height: 1;
-		color: var(--color-border);
+		color: var(--color-surface);
 		margin-bottom: var(--spacing-lg);
 	}
 
 	.not-found h1 {
-		font-family: var(--font-heading);
+		font-family: var(--font-body);
 		font-size: var(--font-size-2xl);
-		font-weight: var(--font-weight-heading);
+		font-weight: 700;
+		letter-spacing: var(--tracking-tight);
 		margin-bottom: var(--spacing-sm);
 	}
 
@@ -53,19 +54,13 @@ import Base from "../layouts/Base.astro";
 	.link-primary {
 		padding: var(--spacing-sm) var(--spacing-lg);
 		font-size: var(--font-size-sm);
-		color: var(--color-bg);
-		background: var(--color-text);
+		color: var(--color-on-brand);
+		background: var(--color-brand);
 		text-decoration: none;
-		border-radius: var(--radius);
-		transition:
-			background var(--transition-fast),
-			transform var(--transition-fast);
 	}
 
 	.link-primary:hover {
-		background: var(--color-brand);
-		color: var(--color-on-brand);
-		transform: translateY(-1px);
+		transform: translateY(-2px);
 	}
 
 	.link-secondary {
@@ -74,15 +69,12 @@ import Base from "../layouts/Base.astro";
 		color: var(--color-text);
 		text-decoration: none;
 		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
-		transition:
-			border-color var(--transition-fast),
-			transform var(--transition-fast);
 	}
 
 	.link-secondary:hover {
-		border-color: var(--color-text);
-		transform: translateY(-1px);
+		border-color: var(--color-brand);
+		color: var(--color-brand);
+		transform: translateY(-2px);
 	}
 
 	@media (max-width: 480px) {

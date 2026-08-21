@@ -10,31 +10,31 @@
   both modes at once; use light-dark(<light>, <dark>) in an override to
   keep them distinct.
 
-  --font-heading (the serif display face) is defined by the font
-  pipeline in astro.config.mjs, not here. To swap it, edit the fonts
-  entry there. --font-body is the deliberately quiet system sans stack
-  below.
+  --font-app is defined by the Astro font pipeline in astro.config.mjs.
+  Both heading and body use the AstroPaper-inspired Google Sans Code family,
+  with a local monospace fallback declared below.
 */
 
 @layer base {
 	:root {
 		color-scheme: light dark;
 
-		/* Colors */
-		--color-bg: light-dark(#fafafa, #0a0a0a);
-		--color-text: light-dark(#1a1a1a, #f5f5f5);
-		--color-muted: light-dark(#6b7280, #a1a1aa);
-		--color-border: light-dark(#e5e7eb, #27272a);
-		--color-surface: light-dark(#ffffff, #18181b);
-		--color-brand: light-dark(#7c3aed, #a78bfa); /* the single accent, used sparingly */
-		--color-on-brand: white; /* text on brand-colored surfaces */
-		--color-brand-ring: color-mix(in srgb, var(--color-brand) 10%, transparent);
-		--color-danger: light-dark(#dc2626, #f87171);
+		/* AstroPaper Paper Light / Paper Dark II */
+		--color-bg: light-dark(#fdfdfd, #212737);
+		--color-text: light-dark(#282728, #eaedf3);
+		--color-muted: light-dark(#6b7280, #afb9ca);
+		--color-border: light-dark(#ece9e9, #ab4b08);
+		--color-surface: light-dark(#e6e6e6, #343f60);
+		--color-brand: light-dark(#006cac, #ff6b01);
+		--color-on-brand: #ffffff;
+		--color-brand-ring: color-mix(in srgb, var(--color-brand) 24%, transparent);
+		--color-danger: light-dark(#b42318, #ff6b6b);
 
 		/* Typography */
-		--font-body: system-ui, -apple-system, sans-serif;
-		--font-weight-heading: 500; /* serif headings and titles */
-		--font-weight-display: 500; /* hero and page titles */
+		--font-body: var(--font-app), ui-monospace, SFMono-Regular, Menlo, monospace;
+		--font-heading: var(--font-app), ui-monospace, SFMono-Regular, Menlo, monospace;
+		--font-weight-heading: 700;
+		--font-weight-display: 700;
 
 		/* Type scale */
 		--font-size-xs: 0.75rem;
@@ -84,13 +84,13 @@
 	@supports not (color: light-dark(#000, #fff)) {
 		:root {
 			color-scheme: light;
-			--color-bg: #fafafa;
-			--color-text: #1a1a1a;
+			--color-bg: #fdfdfd;
+			--color-text: #282728;
 			--color-muted: #6b7280;
-			--color-border: #e5e7eb;
-			--color-surface: #ffffff;
-			--color-brand: #7c3aed;
-			--color-danger: #dc2626;
+			--color-border: #ece9e9;
+			--color-surface: #e6e6e6;
+			--color-brand: #006cac;
+			--color-danger: #b42318;
 		}
 	}
 }
