@@ -107,23 +107,35 @@
         "slug": "jurisdata-ticket-intake",
         "status": "published",
         "data": {
-          "title": "From SEO traffic to case-specific guidance",
+          "title": "From a public legal guide to a helpful next step",
           "client": "JurisDATA",
           "year": "2019–2022",
-          "summary": "A Make-based system connected an SEO article, SIMIT ticket data, Airtable, deterministic routes, and WhatsApp delivery to help more than 50,000 people.",
+          "summary": "A plain-language article about photo-enforced traffic tickets became a careful intake and guidance workflow for people looking for a place to start.",
           "featured_image": { "$media": { "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=900&fit=crop", "alt": "Abstract data visualisation used as a cover image", "filename": "jurisdata-data-cover.jpg" } },
           "url": "https://jurisdata.me/posts/tumbar-fotomulta",
           "content": [
-            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The problem" }] },
-            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "A high-ranking article about photo-enforced traffic tickets brought people to JurisDATA. General information was useful, but each visitor needed a next step based on their own ticket data." }] },
-            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "The system" }] },
-            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Make coordinated intake, SIMIT retrieval through Bright Data, Airtable CRM records, classified guidance routes, Hookdeck webhook monitoring, and Twilio WhatsApp and email delivery. The SIMIT ingestion route handled both returned records and valid no-record outcomes." }] },
-            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "A second Make scenario received a predefined classification from Fluent CRM, normalised Colombian phone numbers, and selected one of four approved WhatsApp paths. The routing was deterministic. It was not a generic autoresponder." }] },
-            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "What made it reliable" }] },
-            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The workflow kept a clean relationship between a person, a ticket-assessment record, a SIMIT result, and a delivery route. It also treated CAPTCHA input, pagination, missing records, data normalisation, and webhook visibility as explicit workflow states." }] },
-            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Outcome" }] },
-            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The system helped more than 50,000 people move from a generic search result to case-specific ticket information and approved next-step guidance." }] },
-            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "This public case study deliberately excludes personal data, raw SIMIT records, legal-message copy, credential details, and decision-rule content." }] }
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "JurisDATA began with a simple belief shared by my partner Alice, who is a lawyer, and me: the law should not feel out of reach for people who need it." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "In Colombia, defending yourself or even understanding your options can be difficult. Legal language is dense, trustworthy help can be hard to find, and many people do not know where to start. We wanted to make that first step easier." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "A guide that found its audience" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "We started by publishing plain-language guides about specific situations, free legal help, and the options people could explore. One article about photo-enforced traffic tickets rose to the top of relevant Google searches, and people began writing to us because they wanted to understand their own situation." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "A useful article was no longer enough. Each person had different details, a different record, and different questions. We needed a way to help without asking a small team to repeat the same browser checks, data entry, and follow-up thousands of times." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Turning interest into a useful next step" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "A person could share the basic information needed to begin. The system retrieved the available public record, kept the result connected to the right person, and sent an approved next step through WhatsApp or email." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The workflow connected Make, SIMIT retrieval through Bright Data, Airtable, Fluent CRM, Hookdeck, Twilio, and email. The important part was not the list of tools. It was making the handoff between them feel simple to the person asking for help." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Keeping the system careful" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The workflow treated a returned record and a no-record result as different, valid outcomes. It looked for an existing person and record before creating another one. A missing record did not become a confident answer, and an automated message did not become legal advice." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Meeting people where they already were" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "For many people, WhatsApp was the easiest channel. A second workflow received an approved classification, checked and normalised a usable phone number for Colombia, and sent the corresponding message. The automation handled the repeatable work while the legal content and decision criteria stayed with the people responsible for them." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "What changed" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Over time, the workflow helped more than 50,000 people move from a general search result to case-specific information and a clearer next step. That number represents people who were looking for a starting point, not a growth metric." }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The work taught me that good automation is not only about removing manual work. In the right setting, it can create enough space for a small team to be more present where human judgment matters most." }] },
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "What stays private" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "This story shares the purpose and shape of the system, not the sensitive details inside it. Ticket records, license plates, contact details, raw webhooks, legal decision rules, message content, connection IDs, credentials, and live workflow exports remain private." }] }
+          ],
+          "gallery": [
+            { "url": "/images/jurisdata/search-performance-context.jpg", "alt": "Redacted Search Console context showing the article's search-discovery channel; all property, metrics, dates, and chart detail are obscured." },
+            { "url": "/images/jurisdata/crm-ingestion-workflow.jpg", "alt": "Blurred workflow topology for record ingestion and CRM synchronisation; all readable labels and identifiers are obscured." },
+            { "url": "/images/jurisdata/whatsapp-routing-workflow.jpg", "alt": "Blurred workflow topology for approved WhatsApp delivery; all readable route labels, content, and identifiers are obscured." }
           ]
         },
         "taxonomies": { "category": ["automation-integrations"], "tag": ["make", "airtable", "api-integration", "reliability"] }
