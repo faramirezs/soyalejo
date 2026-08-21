@@ -129,13 +129,14 @@
             { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "What changed" }] },
             { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Over time, the workflow helped more than 50,000 people move from a general search result to case-specific information and a clearer next step. That number represents people who were looking for a starting point, not a growth metric." }] },
             { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "The work taught me that good automation is not only about removing manual work. In the right setting, it can create enough space for a small team to be more present where human judgment matters most." }] },
-            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "What stays private" }] },
-            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "This story shares the purpose and shape of the system, not the sensitive details inside it. Ticket records, license plates, contact details, raw webhooks, legal decision rules, message content, connection IDs, credentials, and live workflow exports remain private." }] }
+            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "A note on scope" }] },
+            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "These screenshots show the systems as they were used at the time. This case study describes their purpose and operating context; it is not legal advice." }] }
           ],
           "gallery": [
-            { "url": "/images/jurisdata/search-performance-context.jpg", "alt": "Redacted Search Console context showing the article's search-discovery channel; all property, metrics, dates, and chart detail are obscured." },
-            { "url": "/images/jurisdata/crm-ingestion-workflow.jpg", "alt": "Blurred workflow topology for record ingestion and CRM synchronisation; all readable labels and identifiers are obscured." },
-            { "url": "/images/jurisdata/whatsapp-routing-workflow.jpg", "alt": "Blurred workflow topology for approved WhatsApp delivery; all readable route labels, content, and identifiers are obscured." }
+            { "url": "/images/jurisdata/search-performance.jpg", "alt": "Search performance for JurisDATA's guide to photo-enforced traffic tickets." },
+            { "url": "/images/jurisdata/brightdata-output.jpg", "alt": "Bright Data output used during retrieval of photo-enforced ticket information." },
+            { "url": "/images/jurisdata/fotomultas-v2.jpg", "alt": "Airtable formula used to classify photo-enforced ticket records for the appropriate next step." },
+            { "url": "/images/jurisdata/whatsapp-routing.jpg", "alt": "Make workflow that sends an approved classification to Fluent CRM for WhatsApp follow-up." }
           ]
         },
         "taxonomies": { "category": ["automation-integrations"], "tag": ["make", "airtable", "api-integration", "reliability"] }
