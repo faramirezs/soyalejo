@@ -76,4 +76,6 @@ jobs:
               -v /opt/soyalejo/runtime/data.db:/app/data.db \
               -v /opt/soyalejo/runtime/uploads:/app/uploads \
               soyalejo:latest
+            docker image prune --all --force
+            docker builder prune --all --force
           '
