@@ -1,0 +1,71 @@
+name: Verify and deploy
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: soyalejo-production
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Verify site
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run bootstrap
+      - run: npm run typecheck
+      - run: npm run build
+
+  deploy:
+    name: Deploy production
+    needs: verify
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Configure deployment SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
+
+      - name: Deploy committed main
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          ssh -o BatchMode=yes "$DEPLOY_USER@$DEPLOY_HOST" '
+            set -eu
+            cd /opt/soyalejo
+            git fetch origin main
+            git reset --hard origin/main
+            docker build --tag soyalejo:latest .
+            docker rm -f soyalejo || true
+            docker run -d \
+              --name soyalejo \
+              --restart unless-stopped \
+              --network jurisdata_default \
+              --network-alias soyalejo \
+              -e EMDASH_SITE_URL=https://soyalejo.com \
+              -v /opt/soyalejo/runtime/data.db:/app/data.db \
+              -v /opt/soyalejo/runtime/uploads:/app/uploads \
+              soyalejo:latest
+          '
