@@ -58,11 +58,12 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             docker build --tag soyalejo:latest .
+            # The production CMS database is authoritative after initial seeding.
             docker stop soyalejo || true
             if ! docker run --rm \
               -v /opt/soyalejo/runtime/data.db:/app/data.db \
               -v /opt/soyalejo/runtime/uploads:/app/uploads \
-              soyalejo:latest npm run bootstrap; then
+              soyalejo:latest npx emdash seed seed/seed.json --on-conflict skip; then
               docker start soyalejo || true
               exit 1
             fi
