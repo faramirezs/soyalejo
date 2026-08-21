@@ -19,6 +19,7 @@ ENV NODE_ENV=production \
 COPY --from=build /app/package.json /app/package-lock.json ./
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
+COPY --from=build /app/seed ./seed
 COPY --from=build /app/data.db ./data.db
 COPY --from=build /app/uploads ./uploads
 
