@@ -1,44 +1,15 @@
-# EmDash Portfolio Template
+# Alejandro Ramírez — Automation & Integrations Engineer
 
-A visual portfolio for showcasing creative work, built with [EmDash](https://github.com/emdash-cms/emdash). Runs on any Node.js server with SQLite and local file storage. Project pages with tag filtering, case study layouts, and an RSS feed for new work.
+An EmDash portfolio for reliable workflow systems, API integrations, accounting automation, document processing, developer tools, and open-source work.
 
-![Portfolio template work page](https://raw.githubusercontent.com/emdash-cms/emdash/main/assets/templates/portfolio/latest/work-light-desktop.jpg)
+## Case studies
 
-## What's Included
-
-- Project grid with hover effects
-- Tag-based filtering on the work page
-- Individual project pages with galleries
-- About and contact pages
-- RSS feed for new projects
-- SEO metadata and JSON-LD
-- Dark/light mode
-
-## Pages
-
-| Page | Route |
-|---|---|
-| Homepage | `/` |
-| Work listing | `/work` |
-| Single project | `/work/:slug` |
-| About | `/about` |
-| Contact | `/contact` |
-| RSS | `/rss.xml` |
-| 404 | fallback |
-
-## Screenshots
-
-| | Desktop | Mobile |
-|---|---|---|
-| Light | ![work light desktop](https://raw.githubusercontent.com/emdash-cms/emdash/main/assets/templates/portfolio/latest/work-light-desktop.jpg) | ![work light mobile](https://raw.githubusercontent.com/emdash-cms/emdash/main/assets/templates/portfolio/latest/work-light-mobile.jpg) |
-| Dark | ![work dark desktop](https://raw.githubusercontent.com/emdash-cms/emdash/main/assets/templates/portfolio/latest/work-dark-desktop.jpg) | ![work dark mobile](https://raw.githubusercontent.com/emdash-cms/emdash/main/assets/templates/portfolio/latest/work-dark-mobile.jpg) |
-
-## Infrastructure
-
-- **Runtime:** Node.js
-- **Database:** SQLite (local file)
-- **Storage:** Local filesystem
-- **Framework:** Astro with `@astrojs/node`
+- **From SEO traffic to case-specific guidance** — Make, Airtable, data intake, deterministic routes, and delivery automation for JurisDATA.
+- **From supplier PDF to an idempotent Lexware invoice** — n8n document parsing, duplicate prevention, tax-bucket preservation, and source-evidence attachment.
+- **Accounting automation that refuses to guess** — a fail-closed SumUp → Lexware workflow with persisted state and read-back verification.
+- **Payout evidence belongs with the voucher** — scheduled PDF matching and attachment checks for accounting audit trails.
+- **A CLI for a supplier portal built for clicks** — public `hamberger-dl` proof of OIDC, document download, filters, ZIP export, and safe re-runs.
+- **Merged open-source contribution** — [iii-hq/workers#690](https://github.com/iii-hq/workers/pull/690), a Rust streaming LLM provider for OpenCode Go.
 
 ## Local development
 
@@ -48,20 +19,22 @@ npm run bootstrap
 npm run dev
 ```
 
-`npm run bootstrap` applies `seed/seed.json` to the local SQLite database and
-downloads the seed cover images. Run it for a new or intentionally reset local
-database. It updates existing seeded content; it is not required for routine
-starts once `data.db` already contains the portfolio.
+`npm run bootstrap` applies `seed/seed.json` to the local SQLite database and downloads the seed cover images. Run it for a new or intentionally reset database. Start the site at `http://localhost:4321`.
 
-Open http://localhost:4321 for the site and http://localhost:4321/_emdash/admin for the CMS.
+## Verification
 
-## Want Cloudflare Instead?
+```bash
+npm run typecheck
+npm run build
+```
 
-See the [Cloudflare variant](../portfolio-cloudflare) for a version that deploys to Cloudflare Workers with D1 and R2.
+## Technical stack
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/emdash-cms/templates/tree/main/portfolio-cloudflare)
+- Astro + EmDash CMS
+- Node.js server adapter
+- SQLite and local media storage
+- Seeded CMS content in `seed/seed.json`
 
-## See Also
+## Publication boundary
 
-- [All templates](../)
-- [EmDash documentation](https://github.com/emdash-cms/emdash/tree/main/docs)
+The case studies are sanitised. This repository does not contain customer data, financial records, production workflow exports, API credentials, connection IDs, document IDs, or raw legal-intake data.
