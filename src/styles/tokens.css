@@ -5,10 +5,9 @@
   theme.css are unlayered, so they always beat these @layer base
   defaults -- no specificity tricks needed.
 
-  Colors use light-dark(): the first value applies in light mode, the
-  second in dark mode. Overriding a color with a plain value changes
-  both modes at once; use light-dark(<light>, <dark>) in an override to
-  keep them distinct.
+  Colors are explicit theme variables. The default follows the operating
+  system; :root.light and :root.dark override it after a user chooses a
+  theme. This keeps the light and dark accent colors independent.
 
   --font-app is defined by the Astro font pipeline in astro.config.mjs.
   Both heading and body use the AstroPaper-inspired Google Sans Code family,
@@ -17,18 +16,18 @@
 
 @layer base {
 	:root {
-		color-scheme: light dark;
+		color-scheme: light;
 
-		/* AstroPaper Paper Light / Paper Dark II */
-		--color-bg: light-dark(#fdfdfd, #212737);
-		--color-text: light-dark(#282728, #eaedf3);
-		--color-muted: light-dark(#6b7280, #afb9ca);
-		--color-border: light-dark(#ece9e9, #ab4b08);
-		--color-surface: light-dark(#e6e6e6, #343f60);
-		--color-brand: light-dark(#006cac, #ff6b01);
+		/* AstroPaper Paper Light */
+		--color-bg: #fdfdfd;
+		--color-text: #282728;
+		--color-muted: #6b7280;
+		--color-border: #ece9e9;
+		--color-surface: #e6e6e6;
+		--color-brand: #006cac;
 		--color-on-brand: #ffffff;
 		--color-brand-ring: color-mix(in srgb, var(--color-brand) 24%, transparent);
-		--color-danger: light-dark(#b42318, #ff6b6b);
+		--color-danger: #b42318;
 
 		/* Typography */
 		--font-body: var(--font-app), ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -47,14 +46,14 @@
 		--font-size-4xl: 3.5rem;
 
 		/* Line heights */
-		--leading-tight: 1.1; /* hero and project titles */
-		--leading-snug: 1.2; /* headings */
-		--leading-normal: 1.6; /* body copy */
-		--leading-relaxed: 1.7; /* long-form content */
+		--leading-tight: 1.1;
+		--leading-snug: 1.2;
+		--leading-normal: 1.6;
+		--leading-relaxed: 1.7;
 
 		/* Letter spacing */
-		--tracking-tight: -0.02em; /* site title, hero title */
-		--tracking-wide: 0.05em; /* uppercase meta lines, tag chips */
+		--tracking-tight: -0.02em;
+		--tracking-wide: 0.05em;
 
 		/* Spacing */
 		--spacing-xs: 0.25rem;
@@ -77,20 +76,27 @@
 		--transition-slow: 300ms ease;
 	}
 
-	/*
-	 * Light-mode values for browsers without light-dark() (Safari < 17.5,
-	 * Chrome < 123). Must mirror the light values above.
-	 */
-	@supports not (color: light-dark(#000, #fff)) {
-		:root {
-			color-scheme: light;
-			--color-bg: #fdfdfd;
-			--color-text: #282728;
-			--color-muted: #6b7280;
-			--color-border: #ece9e9;
-			--color-surface: #e6e6e6;
-			--color-brand: #006cac;
-			--color-danger: #b42318;
+	@media (prefers-color-scheme: dark) {
+		:root:not(.light):not(.dark) {
+			color-scheme: dark;
+			--color-bg: #212737;
+			--color-text: #eaedf3;
+			--color-muted: #afb9ca;
+			--color-border: #ab4b08;
+			--color-surface: #343f60;
+			--color-brand: #ff6b01;
+			--color-danger: #ff6b6b;
 		}
+	}
+
+	:root.dark {
+		color-scheme: dark;
+		--color-bg: #212737;
+		--color-text: #eaedf3;
+		--color-muted: #afb9ca;
+		--color-border: #ab4b08;
+		--color-surface: #343f60;
+		--color-brand: #ff6b01;
+		--color-danger: #ff6b6b;
 	}
 }
