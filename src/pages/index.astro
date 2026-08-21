@@ -1,194 +1,115 @@
 ---
-import { getEmDashCollection, getSiteSettings } from "emdash";
 import Base from "../layouts/Base.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-
-// Fetch settings and six featured case studies in parallel. Limiting and
-// sorting in the database avoids loading every project just to slice in JS.
-const [settings, { entries: featuredProjects, cacheHint }] = await Promise.all([
-	getSiteSettings(),
-	getEmDashCollection("projects", {
-		orderBy: { published_at: "desc" },
-		limit: 6,
-	}),
-]);
-
-if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 ---
 
 <Base>
-	<section class="hero">
-		<h1 class="hero-title">{settings?.title || "Studio"}</h1>
-		<p class="hero-tagline">{settings?.tagline || "Design & Development"}</p>
-		<p class="hero-intro">
-			I build reliable workflow systems for operational teams—connecting documents,
-			accounting platforms, APIs, and internal tools. Recent work includes{" "}
-			<a href="/work/jurisdata-ticket-intake">JurisDATA</a>,{" "}
-			<a href="/work/sumup-lexware-fail-closed">Ko Kitchen</a>, and an open-source{" "}
-			<a href="/work/iii-opencode-go-provider">streaming provider for iii workers</a>.
-			The focus: systems that are auditable, idempotent, and safe to rerun.
-		</p>
-	</section>
+	<article class="narrative">
+		<h1>
+			Hi, I’m <strong>Alejandro Ramírez</strong>, an{" "}
+			<strong>Automation &amp; Integrations Engineer</strong> based in Berlin.
+		</h1>
 
-	{
-		featuredProjects.length > 0 ? (
-			<section class="featured">
-				<header class="section-header">
-					<h2 class="section-title">Selected Systems</h2>
-					<a href="/work" class="section-link">
-						View all case studies &rarr;
-					</a>
-				</header>
-				<div class="projects-grid">
-					{featuredProjects.map((project) => (
-						<ProjectCard
-							title={project.data.title ?? "Untitled"}
-							summary={project.data.summary}
-							featuredImage={project.data.featured_image ?? ""}
-							href={`/work/${project.id}`}
-							client={project.data.client}
-							year={project.data.year}
-						/>
-					))}
-				</div>
-			</section>
-		) : (
-			<section class="empty-state">
-				<h2>No projects yet</h2>
-				<p>Add your first project in the admin panel.</p>
-				<a href="/_emdash/admin/content/projects/new" class="btn">
-					Add a project
-				</a>
-			</section>
-		)
-	}
+		<p>
+			I build reliable systems for work that should not need manual coordination:
+			accounting posting, supplier-document processing, CRM intake, data reconciliation,
+			and internal tools. The work usually starts with a real operational problem—a team
+			copying data between systems, checking the same document twice, or trying to recover
+			from an automation nobody fully trusts.
+		</p>
+
+		<p>
+			At Ko Kitchen, I build the systems around those gaps. That includes a fail-closed{" "}
+			<a href="/work/sumup-lexware-fail-closed">SumUp → Lexware accounting workflow</a>{" "}
+			that blocks uncertain data instead of guessing, a{" "}
+			<a href="/work/hamberger-invoices-lexware">supplier-invoice pipeline</a>{" "}that
+			creates idempotent Lexware purchase records from PDFs, and a scheduled{" "}
+			<a href="/work/payout-evidence-attachments">payout-evidence workflow</a>{" "}that keeps
+			source documents with the accounting voucher they support.
+		</p>
+
+		<p>
+			Before that, I co-founded JurisDATA. A high-ranking SEO article became an automated
+			intake and guidance system that helped more than 50,000 people. It connected
+			ticket-data retrieval, Airtable, Make, webhook monitoring, and WhatsApp and email
+			delivery. The technical challenge was not only scale. It was making a complex system
+			useful while keeping personal data, legal rules, and operational details private. The{" "}
+			<a href="/work/jurisdata-ticket-intake">public case study</a>{" "}explains the
+			architecture.
+		</p>
+
+		<p>
+			I also build public developer tools.{" "}
+			<a href="https://github.com/faramirezs/hamberger-dl">hamberger-dl</a>{" "}is a command-line
+			tool for downloading supplier documents with OIDC login, token caching, filters, ZIP
+			export, and safe re-runs. In open source, I contributed a Rust streaming LLM-provider
+			worker to iii; the work was{" "}
+			<a href="https://github.com/iii-hq/workers/pull/690">approved and merged</a>.
+		</p>
+
+		<p>
+			I work across n8n, Make, Python, APIs, data pipelines, SQL, Docker, and backend
+			systems. 42 Berlin strengthened my foundation in C, C++, Unix, networking,
+			concurrency, and systems programming.
+		</p>
+
+		<p>
+			I do my best work on high-friction problems where I can understand the system gap,
+			own the integration, and ship a result people can rely on.
+		</p>
+
+		<p class="contact">
+			Find me on{" "}<a href="https://github.com/faramirezs">GitHub</a>{" "}and{" "}
+			<a href="https://www.linkedin.com/in/alejandro-mlops-engineer/">LinkedIn</a>.
+		</p>
+	</article>
 </Base>
 
 <style>
-	.hero {
-		max-width: var(--wide-width);
+	.narrative {
+		max-width: 46rem;
 		margin: 0 auto;
 		padding: var(--spacing-4xl) var(--spacing-lg);
-		text-align: center;
-	}
-
-	.hero-title {
-		font-size: var(--font-size-4xl);
-		font-weight: var(--font-weight-display);
-		margin-bottom: var(--spacing-md);
-		letter-spacing: var(--tracking-tight);
-	}
-
-	.hero-tagline {
-		font-size: var(--font-size-xl);
-		color: var(--color-muted);
-		font-family: var(--font-heading);
-		font-style: italic;
-	}
-
-	.hero-intro {
-		max-width: 44rem;
-		margin: var(--spacing-xl) auto 0;
-		color: var(--color-muted);
+		font-size: var(--font-size-lg);
 		line-height: 1.7;
 	}
 
-	.hero-intro a {
-		color: var(--color-text);
-		text-decoration-color: var(--color-border);
-		text-underline-offset: 0.16em;
+	h1 {
+		margin: 0 0 var(--spacing-2xl);
+		font-size: var(--font-size-3xl);
+		font-weight: var(--font-weight-display);
+		letter-spacing: var(--tracking-tight);
+		line-height: 1.25;
 	}
 
-	.hero-intro a:hover {
+	p {
+		margin: 0 0 var(--spacing-xl);
+	}
+
+	a {
+		color: inherit;
+		text-decoration-color: var(--color-border);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.16em;
+		transition: text-decoration-color var(--transition-fast);
+	}
+
+	a:hover {
 		text-decoration-color: currentColor;
 	}
 
-	.featured {
-		max-width: var(--wide-width);
-		margin: 0 auto;
-		padding: 0 var(--spacing-lg) var(--spacing-4xl);
-	}
-
-	.section-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: baseline;
-		margin-bottom: var(--spacing-2xl);
-		padding-bottom: var(--spacing-md);
-		border-bottom: 1px solid var(--color-border);
-	}
-
-	.section-title {
-		font-size: var(--font-size-lg);
-		font-weight: var(--font-weight-heading);
-	}
-
-	.section-link {
-		font-size: var(--font-size-sm);
+	.contact {
+		margin-top: var(--spacing-2xl);
 		color: var(--color-muted);
-		text-decoration: none;
-		transition: color var(--transition-fast);
-	}
-
-	.section-link:hover {
-		color: var(--color-text);
-	}
-
-	.projects-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: var(--spacing-2xl);
-	}
-
-	.empty-state {
-		text-align: center;
-		padding: var(--spacing-4xl) var(--spacing-lg);
-		max-width: 400px;
-		margin: 0 auto;
-	}
-
-	.empty-state h2 {
-		font-size: var(--font-size-xl);
-		margin-bottom: var(--spacing-sm);
-	}
-
-	.empty-state p {
-		color: var(--color-muted);
-		margin-bottom: var(--spacing-lg);
-	}
-
-	.btn {
-		display: inline-block;
-		padding: var(--spacing-sm) var(--spacing-lg);
-		background: var(--color-text);
-		color: var(--color-bg);
-		text-decoration: none;
-		border-radius: var(--radius);
-		font-size: var(--font-size-sm);
-		transition: opacity var(--transition-fast);
-	}
-
-	.btn:hover {
-		opacity: 0.85;
 	}
 
 	@media (max-width: 768px) {
-		.hero {
+		.narrative {
 			padding: var(--spacing-3xl) var(--spacing-lg);
+			font-size: var(--font-size-base);
 		}
 
-		.hero-title {
-			font-size: var(--font-size-3xl);
-		}
-
-		.projects-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.section-header {
-			flex-direction: column;
-			gap: var(--spacing-sm);
-			align-items: flex-start;
+		h1 {
+			font-size: var(--font-size-2xl);
 		}
 	}
 </style>
