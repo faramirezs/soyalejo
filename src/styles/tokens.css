@@ -5,9 +5,9 @@
   theme.css are unlayered, so they always beat these @layer base
   defaults -- no specificity tricks needed.
 
-  Colors are explicit theme variables. The default follows the operating
-  system; :root.light and :root.dark override it after a user chooses a
-  theme. This keeps the light and dark accent colors independent.
+  The palette is selected on the root data-theme attribute. The light
+  palette is the default; [data-theme="dark"] supplies the paired dark
+  values after the visitor chooses it.
 
   --font-app is defined by the Astro font pipeline in astro.config.mjs.
   Both heading and body use the AstroPaper-inspired Google Sans Code family,
@@ -15,17 +15,24 @@
 */
 
 @layer base {
-	:root {
+	:root,
+	[data-theme="light"] {
 		color-scheme: light;
+		--background: #f6fcf7;
+		--foreground: #060b07;
+		--accent: #027c6d;
+		--accent-foreground: #ffffff;
+		--muted: #c9e4e2;
+		--muted-foreground: #6b7280;
+		--border: #d4e1df;
 
-		/* AstroPaper Paper Light */
-		--color-bg: #fdfdfd;
-		--color-text: #282728;
-		--color-muted: #6b7280;
-		--color-border: #ece9e9;
-		--color-surface: #e6e6e6;
-		--color-brand: #006cac;
-		--color-on-brand: #ffffff;
+		--color-bg: var(--background);
+		--color-text: var(--foreground);
+		--color-muted: var(--muted-foreground);
+		--color-border: var(--border);
+		--color-surface: var(--muted);
+		--color-brand: var(--accent);
+		--color-on-brand: var(--accent-foreground);
 		--color-brand-ring: color-mix(in srgb, var(--color-brand) 24%, transparent);
 		--color-danger: #b42318;
 
@@ -76,27 +83,15 @@
 		--transition-slow: 300ms ease;
 	}
 
-	@media (prefers-color-scheme: dark) {
-		:root:not(.light):not(.dark) {
-			color-scheme: dark;
-			--color-bg: #212737;
-			--color-text: #eaedf3;
-			--color-muted: #afb9ca;
-			--color-border: #ab4b08;
-			--color-surface: #343f60;
-			--color-brand: #ff6b01;
-			--color-danger: #ff6b6b;
-		}
-	}
-
-	:root.dark {
+	[data-theme="dark"] {
 		color-scheme: dark;
-		--color-bg: #212737;
-		--color-text: #eaedf3;
-		--color-muted: #afb9ca;
-		--color-border: #ab4b08;
-		--color-surface: #343f60;
-		--color-brand: #ff6b01;
+		--background: #1a1a1a;
+		--foreground: #f5efe4;
+		--accent: #ee781e;
+		--accent-foreground: #1a1a1a;
+		--muted: #38342f;
+		--muted-foreground: #a59a8c;
+		--border: #6f5648;
 		--color-danger: #ff6b6b;
 	}
 }

@@ -53,14 +53,14 @@ const pageCtx = createPublicPageContext({
 			href="/rss.xml"
 		/>
 		<script is:inline>
-			// Apply an explicit theme choice immediately to prevent flash.
-			// With no cookie, color-scheme: light dark follows the OS.
+			// Apply an explicit saved choice before paint. Without one, the
+			// default :root light palette is used.
 			(function () {
 				var c = document.cookie;
 				var i = c.indexOf("theme=");
 				var theme = i >= 0 ? c.slice(i + 6).split(";")[0] : null;
 				if (theme === "dark" || theme === "light") {
-					document.documentElement.classList.add(theme);
+					document.documentElement.dataset.theme = theme;
 				}
 			})();
 		</script>
@@ -125,9 +125,7 @@ const pageCtx = createPublicPageContext({
 			const themeToggle = document.querySelector<HTMLButtonElement>(".theme-toggle");
 
 			function resolvedTheme(): "light" | "dark" {
-				if (root.classList.contains("dark")) return "dark";
-				if (root.classList.contains("light")) return "light";
-				return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+				return root.dataset.theme === "dark" ? "dark" : "light";
 			}
 
 			function updateThemeToggle() {
@@ -140,8 +138,7 @@ const pageCtx = createPublicPageContext({
 			function setTheme(theme: "light" | "dark") {
 				const secure = location.protocol === "https:" ? "; Secure" : "";
 				document.cookie = `theme=${theme}; path=/; max-age=31536000; SameSite=Lax${secure}`;
-				root.classList.remove("light", "dark");
-				root.classList.add(theme);
+				root.dataset.theme = theme;
 				updateThemeToggle();
 			}
 
@@ -174,23 +171,7 @@ const pageCtx = createPublicPageContext({
 					padding: 0;
 				}
 
-				/*
-				 * Design tokens live in src/styles/tokens.css. Colors are
-				 * defined with light-dark(); these rules pin the scheme when
-				 * the footer switcher sets an explicit choice. With no class,
-				 * color-scheme: light dark follows the OS preference. The
-				 * @supports guard keeps the toggle from forcing dark UA form
-				 * controls on browsers stuck on the plain-light fallback.
-				 */
-				@supports (color: light-dark(#000, #fff)) {
-					:root.light {
-						color-scheme: light;
-					}
-
-					:root.dark {
-						color-scheme: dark;
-					}
-				}
+				/* Theme colors are defined by :root and [data-theme] token rules. */
 
 				html {
 					scroll-behavior: smooth;
