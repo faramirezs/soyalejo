@@ -76,30 +76,12 @@
       "label": "Primary Navigation",
       "items": [
         { "type": "custom", "label": "Case Studies", "url": "/work" },
-        { "type": "custom", "label": "About", "url": "/about" },
         { "type": "custom", "label": "Contact", "url": "/contact" }
       ]
     }
   ],
   "content": {
     "pages": [
-      {
-        "id": "about",
-        "slug": "about",
-        "status": "published",
-        "data": {
-          "title": "About",
-          "content": [
-            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "I am an Automation & Integrations Engineer who turns manual operations into reliable, traceable systems." }] },
-            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "I work across APIs, Make, n8n, Python, and data workflows. I start with the operational bottleneck, connect the systems, make failure states visible, and hand over a workflow people can use." }] },
-            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Where I do my best work" }] },
-            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "I grow fastest in teams that give me ownership of a difficult system gap. My strongest work sits between business operations and engineering: accounting flows, CRM and customer journeys, document processing, API integrations, and internal tools." }] },
-            { "_type": "block", "style": "h2", "children": [{ "_type": "span", "text": "Proof" }] },
-            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "At JurisDATA, I connected SEO demand to automated case intake and guidance for more than 50,000 people. At Ko Kitchen, I build accounting, invoice, and operations automation. I also contribute production Rust code to open source." }] },
-            { "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Best-fit roles: Automation & Integrations Engineer, Business Systems Engineer, Internal Tools Engineer, and Backend & Integrations Engineer." }] }
-          ]
-        }
-      }
     ],
     "projects": [
       {
