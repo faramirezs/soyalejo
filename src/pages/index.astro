@@ -20,6 +20,14 @@ if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 	<section class="hero">
 		<h1 class="hero-title">{settings?.title || "Studio"}</h1>
 		<p class="hero-tagline">{settings?.tagline || "Design & Development"}</p>
+		<p class="hero-intro">
+			I build reliable workflow systems for operational teams—connecting documents,
+			accounting platforms, APIs, and internal tools. Recent work includes{" "}
+			<a href="/work/jurisdata-ticket-intake">JurisDATA</a>,{" "}
+			<a href="/work/sumup-lexware-fail-closed">Ko Kitchen</a>, and an open-source{" "}
+			<a href="/work/iii-opencode-go-provider">streaming provider for iii workers</a>.
+			The focus: systems that are auditable, idempotent, and safe to rerun.
+		</p>
 	</section>
 
 	{
@@ -76,6 +84,23 @@ if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 		color: var(--color-muted);
 		font-family: var(--font-heading);
 		font-style: italic;
+	}
+
+	.hero-intro {
+		max-width: 44rem;
+		margin: var(--spacing-xl) auto 0;
+		color: var(--color-muted);
+		line-height: 1.7;
+	}
+
+	.hero-intro a {
+		color: var(--color-text);
+		text-decoration-color: var(--color-border);
+		text-underline-offset: 0.16em;
+	}
+
+	.hero-intro a:hover {
+		text-decoration-color: currentColor;
 	}
 
 	.featured {
