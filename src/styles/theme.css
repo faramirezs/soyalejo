@@ -1,3 +1,5 @@
+@import "rehype-callouts/theme/obsidian";
+
 /*
   theme.css -- your theme overrides. This is the file to edit to
   retheme the site.
@@ -11,9 +13,9 @@
   changes light and dark mode at once; use light-dark(<light>, <dark>)
   to set different values per mode.
 
-  The serif display face (--font-heading) is loaded in astro.config.mjs.
-  Swap the loaded font there; use overrides here for system fonts or to
-  change the quiet system-sans body face (--font-body).
+The Google Sans Code family is loaded by the font pipeline in
+astro.config.mjs. Colors and spacing stay in tokens.css; this file owns
+the site-wide interaction and callout presentation.
 
   Example:
 
@@ -24,5 +26,52 @@
   }
 */
 
-:root {
+:where(a, button, input, textarea, select) {
+	outline-color: var(--color-brand);
+	outline-offset: 0.2em;
 }
+
+:where(a, button) {
+	transition:
+		color var(--transition-fast),
+		background-color var(--transition-fast),
+		border-color var(--transition-fast),
+		transform var(--transition-fast);
+}
+
+:where(a, button):focus-visible {
+	outline: 2px dashed var(--color-brand);
+}
+
+:target {
+	scroll-margin-block: var(--spacing-lg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.paper-shell main > :is(article, section, div) {
+		animation: paper-enter var(--transition-slow) both;
+	}
+
+	.paper-shell :where(.project-gallery figure, .project-card, .tag-filter) {
+		transition:
+			transform var(--transition-base),
+			border-color var(--transition-base);
+	}
+
+	.paper-shell :where(.project-gallery figure, .project-card, .tag-filter):hover {
+		transform: translateY(-2px);
+	}
+}
+
+@keyframes paper-enter {
+	from {
+		opacity: 0;
+		transform: translateY(0.5rem);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+

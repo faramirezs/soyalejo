@@ -42,21 +42,21 @@ import Base from "../layouts/Base.astro";
 
 <style>
 	.contact-page {
-		max-width: var(--wide-width);
+		max-width: 52rem;
 		margin: 0 auto;
-		padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-4xl);
+		padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-4xl);
 	}
 
 	.contact-header {
-		max-width: var(--max-width);
-		padding-bottom: var(--spacing-3xl);
+		padding-bottom: var(--spacing-2xl);
 		border-bottom: 1px solid var(--color-border);
 	}
 
 	.contact-title {
-		font-family: var(--font-heading);
+		font-family: var(--font-body);
 		font-size: var(--font-size-4xl);
-		font-weight: var(--font-weight-display);
+		font-weight: 700;
+		letter-spacing: var(--tracking-tight);
 		line-height: var(--leading-tight);
 		margin-bottom: var(--spacing-lg);
 	}
@@ -69,64 +69,62 @@ import Base from "../layouts/Base.astro";
 	}
 
 	.contact-cta {
-		display: inline-block;
-		font-family: var(--font-heading);
-		font-size: var(--font-size-lg);
-		text-decoration: none;
+		font-weight: 700;
 		color: var(--color-brand);
-	}
-
-	.contact-cta:hover {
-		color: var(--color-text);
+		text-underline-offset: 0.2em;
 	}
 
 	.contact-info {
+		margin-top: var(--spacing-2xl);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.info-section {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: var(--spacing-2xl);
-		padding-top: var(--spacing-3xl);
+		grid-template-columns: 10rem 1fr;
+		gap: var(--spacing-lg);
+		padding: var(--spacing-lg) 0;
+		border-bottom: 1px solid var(--color-border);
 	}
 
 	.info-section h2 {
-		font-family: var(--font-heading);
-		font-size: var(--font-size-lg);
-		font-weight: var(--font-weight-heading);
-		margin-bottom: var(--spacing-sm);
+		font-family: var(--font-body);
+		font-size: var(--font-size-base);
+		font-weight: 700;
 	}
 
 	.info-section p,
-	.info-section a {
-		font-size: var(--font-size-sm);
+	.info-section a,
+	.profile-links {
+		font-size: var(--font-size-base);
 		color: var(--color-muted);
 	}
 
 	.info-section a {
-		text-decoration: none;
-	}
-
-	.info-section a:hover {
-		color: var(--color-text);
+		color: var(--color-brand);
+		text-underline-offset: 0.2em;
 	}
 
 	.profile-links {
 		list-style: none;
 		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-sm);
+		gap: var(--spacing-lg);
 	}
 
 	@media (max-width: 768px) {
 		.contact-page {
-			padding-top: var(--spacing-2xl);
+			padding-top: var(--spacing-xl);
 		}
 
 		.contact-title {
 			font-size: var(--font-size-3xl);
 		}
+	}
 
-		.contact-info {
+	@media (max-width: 480px) {
+		.info-section {
 			grid-template-columns: 1fr;
-			gap: var(--spacing-xl);
+			gap: var(--spacing-sm);
 		}
 	}
 </style>

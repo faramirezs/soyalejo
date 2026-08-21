@@ -7,7 +7,6 @@ import {
 	getTermsForEntries,
 } from "emdash";
 import Base from "../../layouts/Base.astro";
-import ProjectCard from "../../components/ProjectCard.astro";
 
 // Get filter from query param. When set, push the filter down to the
 // database via `where` instead of loading every project and filtering
@@ -73,19 +72,32 @@ const projectsWithTags = sortedProjects.map((project) => ({
 	{
 		projectsWithTags.length > 0 ? (
 			<section class="projects">
-				<div class="projects-grid">
+				<ul class="project-list">
 					{projectsWithTags.map(({ project, projectTags }) => (
-						<ProjectCard
-							title={project.data.title ?? "Untitled"}
-							summary={project.data.summary}
-							featuredImage={project.data.featured_image ?? ""}
-							href={`/work/${project.id}`}
-							client={project.data.client}
-							year={project.data.year}
-							tags={projectTags.map((t) => t.label)}
-						/>
+						<li class="project-list-item">
+							<a href={`/work/${project.id}`} class="project-list-link">
+								<h2>{project.data.title ?? "Untitled"}</h2>
+								<div class="project-list-meta">
+									{project.data.client && <span>{project.data.client}</span>}
+									{project.data.client && project.data.year && (
+										<span aria-hidden="true">·</span>
+									)}
+									{project.data.year && <span>{project.data.year}</span>}
+								</div>
+								{project.data.summary && <p>{project.data.summary}</p>}
+							</a>
+							{
+								projectTags.length > 0 && (
+									<p class="project-list-tags">
+										{projectTags.map((tag) => (
+											<a href={`/work?tag=${tag.slug}`}>{tag.label}</a>
+										))}
+									</p>
+								)
+							}
+						</li>
 					))}
-				</div>
+				</ul>
 			</section>
 		) : (
 			<section class="empty-state">
@@ -110,89 +122,113 @@ const projectsWithTags = sortedProjects.map((project) => ({
 </Base>
 
 <style>
-	.work-header {
-		max-width: var(--wide-width);
+	.work-header,
+	.projects {
+		max-width: 52rem;
 		margin: 0 auto;
-		padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-2xl);
+		padding-inline: var(--spacing-lg);
+	}
+
+	.work-header {
+		padding-top: var(--spacing-2xl);
+		padding-bottom: var(--spacing-2xl);
 	}
 
 	.work-header h1 {
-		font-size: var(--font-size-3xl);
-		margin-bottom: var(--spacing-md);
+		font-family: var(--font-body);
+		font-size: var(--font-size-4xl);
+		font-weight: 700;
+		letter-spacing: var(--tracking-tight);
+		margin-bottom: var(--spacing-sm);
 	}
 
 	.work-intro {
 		font-size: var(--font-size-lg);
 		color: var(--color-muted);
-		max-width: 600px;
 	}
 
 	.tag-filters {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--spacing-sm);
+		gap: var(--spacing-md);
 		margin-top: var(--spacing-xl);
 	}
 
-	.tag-filter {
-		display: inline-block;
-		padding: var(--spacing-xs) var(--spacing-md);
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		text-decoration: none;
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
-		transition:
-			color var(--transition-fast),
-			border-color var(--transition-fast),
-			background var(--transition-fast);
-	}
-
-	.tag-filter:hover {
-		color: var(--color-text);
-		border-color: var(--color-text);
-	}
-
-	.tag-filter.active {
-		color: var(--color-bg);
-		background: var(--color-text);
-		border-color: var(--color-text);
-	}
-
+	.tag-filter,
 	.tag-clear {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--spacing-xs);
-		padding: var(--spacing-xs) var(--spacing-md);
-		font-size: var(--font-size-sm);
 		color: var(--color-muted);
-		text-decoration: none;
-		transition: color var(--transition-fast);
+		font-size: var(--font-size-sm);
+		text-decoration-color: transparent;
+		text-underline-offset: 0.35em;
 	}
 
+	.tag-filter:hover,
+	.tag-filter.active,
 	.tag-clear:hover {
-		color: var(--color-text);
-	}
-
-	.tag-clear::before {
-		content: "×";
-		font-size: 1.1em;
+		color: var(--color-brand);
+		text-decoration-color: currentColor;
 	}
 
 	.projects {
-		max-width: var(--wide-width);
-		margin: 0 auto;
-		padding: 0 var(--spacing-lg) var(--spacing-4xl);
+		padding-bottom: var(--spacing-4xl);
 	}
 
-	.projects-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: var(--spacing-2xl);
+	.project-list {
+		list-style: none;
+		border-top: 1px solid var(--color-border);
+	}
+
+	.project-list-item {
+		padding: var(--spacing-xl) 0;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.project-list-link {
+		display: block;
+		text-decoration: none;
+	}
+
+	.project-list-link h2 {
+		font-family: var(--font-body);
+		font-size: var(--font-size-xl);
+		font-weight: 700;
+		letter-spacing: var(--tracking-tight);
+		color: var(--color-brand);
+	}
+
+	.project-list-link:hover h2 {
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+
+	.project-list-meta,
+	.project-list-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--spacing-sm);
+		margin-top: var(--spacing-sm);
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+	}
+
+	.project-list-link p {
+		margin-top: var(--spacing-sm);
+		line-height: var(--leading-normal);
+		color: var(--color-text);
+	}
+
+	.project-list-tags a {
+		color: inherit;
+		text-underline-offset: 0.2em;
+	}
+
+	.project-list-tags a:hover {
+		color: var(--color-brand);
 	}
 
 	.empty-state {
-		text-align: center;
+		max-width: 52rem;
+		margin: 0 auto;
 		padding: var(--spacing-4xl) var(--spacing-lg);
 		color: var(--color-muted);
 	}
@@ -201,16 +237,18 @@ const projectsWithTags = sortedProjects.map((project) => ({
 		display: inline-block;
 		margin-top: var(--spacing-lg);
 		padding: var(--spacing-sm) var(--spacing-lg);
-		background: var(--color-text);
-		color: var(--color-bg);
+		background: var(--color-brand);
+		color: var(--color-on-brand);
 		text-decoration: none;
-		border-radius: var(--radius);
-		font-size: var(--font-size-sm);
+	}
+
+	.btn:hover {
+		transform: translateY(-2px);
 	}
 
 	@media (max-width: 768px) {
-		.projects-grid {
-			grid-template-columns: 1fr;
+		.work-header h1 {
+			font-size: var(--font-size-3xl);
 		}
 	}
 </style>

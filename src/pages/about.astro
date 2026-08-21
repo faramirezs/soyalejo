@@ -8,15 +8,20 @@ const { entry: page, cacheHint } = await getEmDashEntry("pages", "about");
 if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 ---
 
-<Base title="About" description="Learn more about who we are and what we do.">
-	<div class="about-page">
-		<header class="about-header">
-			<h1 class="about-title" {...page?.edit?.title}>
+<Base title="About" description="Learn more about Alejandro Ramírez, an Automation & Integrations Engineer.">
+	<article class="info-page">
+		<nav class="page-breadcrumb" aria-label="Breadcrumb">
+			<a href="/">Home</a>
+			<span aria-hidden="true">»</span>
+			<span>About</span>
+		</nav>
+		<header class="info-header">
+			<h1 class="info-title" {...page?.edit?.title}>
 				{page?.data?.title || "About"}
 			</h1>
 		</header>
 
-		<div class="about-content" {...page?.edit?.content}>
+		<div class="info-content" {...page?.edit?.content}>
 			{
 				page?.data?.content ? (
 					<PortableText value={page.data.content} />
@@ -25,148 +30,84 @@ if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 				)
 			}
 		</div>
-
-		<aside class="about-sidebar">
-			<div class="sidebar-section">
-				<h3>Services</h3>
-				<ul>
-					<li>Brand Identity</li>
-					<li>Web Design & Development</li>
-					<li>Print Design</li>
-					<li>Photography & Art Direction</li>
-				</ul>
-			</div>
-
-			<div class="sidebar-section">
-				<h3>Contact</h3>
-				<p>
-					<a href="mailto:hello@studio.example">hello@studio.example</a>
-				</p>
-				<p>
-					<a href="/contact">Send us a message →</a>
-				</p>
-			</div>
-		</aside>
-	</div>
+	</article>
 </Base>
 
 <style>
-	.about-page {
-		max-width: var(--wide-width);
+	.info-page {
+		max-width: 52rem;
 		margin: 0 auto;
 		padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-4xl);
-		display: grid;
-		grid-template-columns: 2fr 1fr;
-		grid-template-rows: auto 1fr;
-		gap: var(--spacing-4xl);
 	}
 
-	.about-header {
-		grid-column: 1 / -1;
+	.page-breadcrumb {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--spacing-sm);
+		margin-bottom: var(--spacing-2xl);
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
 	}
 
-	.about-title {
-		font-family: var(--font-heading);
+	.page-breadcrumb a {
+		color: inherit;
+	}
+
+	.info-title {
+		font-family: var(--font-body);
 		font-size: var(--font-size-4xl);
-		font-weight: var(--font-weight-display);
+		font-weight: 700;
+		letter-spacing: var(--tracking-tight);
 		line-height: var(--leading-tight);
+		margin-bottom: var(--spacing-2xl);
 	}
 
-	.about-content {
+	.info-content {
 		font-size: var(--font-size-base);
 		line-height: var(--leading-relaxed);
 	}
 
-	.about-content :global(p) {
-		margin-bottom: 1.5em;
+	.info-content :global(p) {
+		margin-bottom: 1.75em;
 	}
 
-	.about-content :global(h2) {
-		font-family: var(--font-heading);
+	.info-content :global(h2) {
+		font-family: var(--font-body);
 		font-size: var(--font-size-2xl);
-		font-weight: var(--font-weight-heading);
-		margin-top: 2.5em;
-		margin-bottom: 0.75em;
+		font-weight: 700;
+		letter-spacing: var(--tracking-tight);
+		margin: 2.75em 0 0.75em;
 	}
 
-	.about-content :global(h3) {
-		font-family: var(--font-heading);
+	.info-content :global(h3) {
+		font-family: var(--font-body);
 		font-size: var(--font-size-xl);
-		font-weight: var(--font-weight-heading);
-		margin-top: 2em;
-		margin-bottom: 0.5em;
+		font-weight: 700;
+		margin: 2em 0 0.5em;
 	}
 
-	.about-sidebar {
-		position: sticky;
-		top: var(--spacing-xl);
-		align-self: start;
+	.info-content :global(ul),
+	.info-content :global(ol) {
+		margin: 0 0 1.75em;
+		padding-left: 1.25em;
 	}
 
-	.sidebar-section {
-		margin-bottom: var(--spacing-2xl);
-	}
-
-	.sidebar-section h3 {
-		font-family: var(--font-heading);
-		font-size: var(--font-size-lg);
-		font-weight: var(--font-weight-heading);
-		margin-bottom: var(--spacing-md);
-	}
-
-	.sidebar-section ul {
-		list-style: none;
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-	}
-
-	.sidebar-section li {
+	.info-content :global(li) {
 		margin-bottom: var(--spacing-sm);
 	}
 
-	.sidebar-section p {
-		font-size: var(--font-size-sm);
-		color: var(--color-muted);
-		margin-bottom: var(--spacing-sm);
-	}
-
-	.sidebar-section a {
-		color: var(--color-text);
-		text-decoration: none;
-		transition: color var(--transition-fast);
-	}
-
-	.sidebar-section a:hover {
+	.info-content :global(a) {
 		color: var(--color-brand);
+		text-underline-offset: 0.2em;
 	}
 
 	@media (max-width: 768px) {
-		.about-page {
-			grid-template-columns: 1fr;
-			gap: var(--spacing-2xl);
-		}
-
-		.about-title {
-			font-size: var(--font-size-3xl);
-		}
-
-		.about-sidebar {
-			position: static;
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			gap: var(--spacing-xl);
+		.info-page {
 			padding-top: var(--spacing-xl);
-			border-top: 1px solid var(--color-border);
 		}
 
-		.sidebar-section {
-			margin-bottom: 0;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.about-sidebar {
-			grid-template-columns: 1fr;
+		.info-title {
+			font-size: var(--font-size-3xl);
 		}
 	}
 </style>
