@@ -21,10 +21,14 @@ if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 // Related projects: order by date in the DB and request a small lookahead
 // so we can drop the current entry without re-querying. Avoids loading
 // every project just to slice off two.
-const { entries: relatedProjects } = await getEmDashCollection("projects", {
-	orderBy: { published_at: "desc" },
-	limit: 3,
-});
+const { entries: relatedProjects, cacheHint: relatedProjectsCacheHint } =
+	await getEmDashCollection("projects", {
+		orderBy: { published_at: "desc" },
+		limit: 3,
+	});
+
+if (Astro.cache?.enabled) Astro.cache.set(relatedProjectsCacheHint);
+
 const otherProjects = relatedProjects.filter((p) => p.id !== project.id).slice(0, 2);
 
 // Parse gallery if present
@@ -44,8 +48,16 @@ function getImageSrc(img: unknown): string | undefined {
 	title={project.data.title}
 	description={project.data.summary}
 	image={getImageSrc(project.data.featured_image)}
+	variant="paper"
 >
 	<article class="project">
+		<nav class="project-breadcrumb" aria-label="Breadcrumb">
+			<a href="/">Home</a>
+			<span aria-hidden="true">»</span>
+			<a href="/work">Case studies</a>
+			<span aria-hidden="true">»</span>
+			<span>{project.data.client || "Case study"}</span>
+		</nav>
 		<header class="project-header">
 			<div class="project-meta">
 				{
@@ -143,9 +155,23 @@ function getImageSrc(img: unknown): string | undefined {
 
 <style>
 	.project {
-		max-width: var(--max-width);
+		max-width: 52rem;
 		margin: 0 auto;
-		padding: 0 var(--spacing-lg) var(--spacing-4xl);
+		padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-4xl);
+		--paper-link: light-dark(#2563eb, #93c5fd);
+	}
+
+	.project-breadcrumb {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--spacing-sm);
+		margin-bottom: var(--spacing-2xl);
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+	}
+
+	.project-breadcrumb a {
+		color: inherit;
 	}
 
 	.project-header {
@@ -155,9 +181,7 @@ function getImageSrc(img: unknown): string | undefined {
 	.project-meta {
 		font-size: var(--font-size-sm);
 		color: var(--color-muted);
-		margin-bottom: var(--spacing-sm);
-		text-transform: uppercase;
-		letter-spacing: var(--tracking-wide);
+		margin-bottom: var(--spacing-md);
 	}
 
 	.meta-separator {
@@ -165,11 +189,12 @@ function getImageSrc(img: unknown): string | undefined {
 	}
 
 	.project-title {
-		font-family: var(--font-heading);
+		font-family: var(--font-body);
 		font-size: var(--font-size-4xl);
-		font-weight: var(--font-weight-display);
+		font-weight: 750;
 		line-height: var(--leading-tight);
-		margin-bottom: var(--spacing-lg);
+		letter-spacing: var(--tracking-tight);
+		margin-bottom: var(--spacing-md);
 	}
 
 	.project-summary {
@@ -182,9 +207,9 @@ function getImageSrc(img: unknown): string | undefined {
 	.project-link {
 		display: inline-block;
 		font-size: var(--font-size-sm);
-		color: var(--color-brand);
-		text-decoration: none;
-		transition: color var(--transition-fast);
+		font-weight: 600;
+		color: var(--paper-link);
+		text-underline-offset: 0.2em;
 	}
 
 	.project-link:hover {
@@ -193,12 +218,14 @@ function getImageSrc(img: unknown): string | undefined {
 
 	.featured-image {
 		margin-bottom: var(--spacing-3xl);
+		border-block: 1px solid var(--color-border);
+		padding: var(--spacing-lg) 0;
 	}
 
 	.featured-image img {
 		width: 100%;
 		height: auto;
-		border-radius: var(--radius);
+		border-radius: 0;
 	}
 
 	.project-content {
@@ -207,21 +234,22 @@ function getImageSrc(img: unknown): string | undefined {
 	}
 
 	.project-content :global(p) {
-		margin-bottom: 1.5em;
+		margin-bottom: 1.75em;
 	}
 
 	.project-content :global(h2) {
-		font-family: var(--font-heading);
+		font-family: var(--font-body);
 		font-size: var(--font-size-2xl);
-		font-weight: var(--font-weight-heading);
-		margin-top: 2.5em;
+		font-weight: 750;
+		letter-spacing: var(--tracking-tight);
+		margin-top: 2.75em;
 		margin-bottom: 0.75em;
 	}
 
 	.project-content :global(h3) {
-		font-family: var(--font-heading);
+		font-family: var(--font-body);
 		font-size: var(--font-size-xl);
-		font-weight: var(--font-weight-heading);
+		font-weight: 700;
 		margin-top: 2em;
 		margin-bottom: 0.5em;
 	}
@@ -251,17 +279,24 @@ function getImageSrc(img: unknown): string | undefined {
 		border-radius: var(--radius);
 	}
 
+	.project-content :global(a) {
+		color: var(--paper-link);
+		text-underline-offset: 0.2em;
+	}
+
 	.project-gallery {
 		margin-top: var(--spacing-3xl);
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: var(--spacing-lg);
+		grid-template-columns: 1fr;
+		gap: var(--spacing-2xl);
+		border-top: 1px solid var(--color-border);
+		padding-top: var(--spacing-2xl);
 	}
 
 	.gallery-item img {
 		width: 100%;
 		height: auto;
-		border-radius: var(--radius);
+		border-radius: 0;
 	}
 
 	.gallery-item figcaption {
@@ -272,28 +307,54 @@ function getImageSrc(img: unknown): string | undefined {
 	}
 
 	.more-projects {
-		background: var(--color-surface);
-		padding: var(--spacing-4xl) 0;
-		margin-top: var(--spacing-2xl);
+		margin-top: var(--spacing-4xl);
+		border-top: 1px solid var(--color-border);
+		padding-top: var(--spacing-2xl);
 	}
 
 	.more-inner {
-		max-width: var(--wide-width);
+		max-width: 52rem;
 		margin: 0 auto;
 		padding: 0 var(--spacing-lg);
 	}
 
 	.more-title {
-		font-family: var(--font-heading);
+		font-family: var(--font-body);
 		font-size: var(--font-size-2xl);
-		font-weight: var(--font-weight-heading);
-		margin-bottom: var(--spacing-2xl);
+		font-weight: 750;
+		letter-spacing: var(--tracking-tight);
+		margin-bottom: var(--spacing-lg);
 	}
 
 	.more-grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: var(--spacing-2xl);
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+
+	.more-grid :global(.project-card) {
+		border-top: 1px solid var(--color-border);
+		padding: var(--spacing-lg) 0;
+	}
+
+	.more-grid :global(.card-link) {
+		display: block;
+	}
+
+	.more-grid :global(.card-image) {
+		display: none;
+	}
+
+	.more-grid :global(.card-title) {
+		font-family: var(--font-body);
+		font-size: var(--font-size-lg);
+		font-weight: 700;
+		color: var(--paper-link);
+	}
+
+	.more-grid :global(.card-summary) {
+		font-size: var(--font-size-base);
+		line-height: var(--leading-normal);
 	}
 
 	@media (max-width: 768px) {
