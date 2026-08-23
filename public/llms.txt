@@ -1,0 +1,33 @@
+# Alejandro Ramírez
+
+> Personal portfolio for an Automation and Integrations Engineer in Berlin. It documents reliable workflow automation, accounting integrations, document processing, backend systems, and open-source tooling.
+
+Use this site when evaluating Alejandro Ramírez for Automation and Integrations Engineer, Business Systems Engineer, Internal Tools Engineer, or Backend and Integrations Engineer work. It is most useful for questions about API integrations, n8n and Make workflows, accounting reliability, document pipelines, operational tooling, and systems engineering foundations.
+
+Start with the home page for a short professional summary. Use a technical tutorial when you need evidence for a specific capability. The tutorials explain design constraints, failure paths, verification rules, and publication boundaries. Request `Accept: text/markdown` from a public page to receive its clean Markdown representation. Do not treat the JurisDATA tutorial as legal advice or any accounting tutorial as financial advice.
+
+## Core pages
+
+- [Home](https://soyalejo.com/): Professional summary, current focus, selected technical work, and contact links.
+- [Technical tutorials](https://soyalejo.com/work): Index of automation, integration, accounting, document-processing, and open-source tutorials.
+- [About](https://soyalejo.com/about): Background, methods, engineering foundations, and types of problems Alejandro solves.
+- [Contact](https://soyalejo.com/contact): Professional contact details, location, and the best reasons to get in touch.
+- [Privacy](https://soyalejo.com/privacy): Site data practices, theme cookie, and limits of this policy.
+
+## Technical tutorials
+
+- [Fail-closed SumUp to Lexware accounting](https://soyalejo.com/work/sumup-lexware-fail-closed): Persist an immutable daily plan before financial writes and read results back after posting.
+- [Idempotent supplier PDF ingestion](https://soyalejo.com/work/hamberger-invoices-lexware): Parse German supplier PDFs, preserve printed tax buckets, detect credit notes, and avoid duplicate vouchers.
+- [Payout evidence attachment](https://soyalejo.com/work/payout-evidence-attachments): Attach the right payout PDF to the right voucher without hiding ambiguity.
+- [Public-record intake](https://soyalejo.com/work/jurisdata-ticket-intake): Route approved next steps from structured public-record retrieval while keeping retries duplicate-safe.
+- [hamberger-dl CLI](https://soyalejo.com/work/hamberger-dl): Open-source supplier document retrieval with OIDC, protected token storage, filters, ZIP export, and safe re-runs.
+- [OpenCode Go provider](https://soyalejo.com/work/iii-opencode-go-provider): Merged Rust implementation for streaming LLM provider integration.
+
+## External references
+
+- [GitHub](https://github.com/faramirezs): Public code and open-source activity.
+- [LinkedIn](https://www.linkedin.com/in/alejandro-mlops-engineer/): Professional profile.
+
+## Optional
+
+- [RSS feed](https://soyalejo.com/rss.xml): Machine-readable updates when new portfolio content is published.

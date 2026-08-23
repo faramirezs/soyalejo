@@ -8,6 +8,7 @@ import { sqlite } from "emdash/db";
 
 export default defineConfig({
 	output: "server",
+	site: "https://soyalejo.com",
 	adapter: node({
 		mode: "standalone",
 	}),

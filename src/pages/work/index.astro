@@ -7,6 +7,7 @@ import {
 	getTermsForEntries,
 } from "emdash";
 import Base from "../../layouts/Base.astro";
+import { markdownResponse } from "../../lib/markdown";
 
 // Get filter from query param. When set, push the filter down to the
 // database via `where` instead of loading every project and filtering
@@ -35,6 +36,29 @@ const projectsWithTags = sortedProjects.map((project) => ({
 	project,
 	projectTags: tagsByEntry.get(project.data.id) ?? [],
 }));
+
+const tutorials = projectsWithTags
+	.map(({ project, projectTags }) => {
+		const title = project.data.title ?? "Untitled";
+		const context = [project.data.client, project.data.year].filter(Boolean).join(", ");
+		const tags = projectTags.map((tag) => tag.label).join(", ");
+		return `## [${title}](https://soyalejo.com/work/${project.id})
+
+${project.data.summary || "No summary available."}
+
+${context ? `Context: ${context}.` : ""}${tags ? ` Technologies: ${tags}.` : ""}`;
+	})
+	.join("\n\n");
+const markdownPage = Astro.locals.prefersMarkdown
+	? markdownResponse(`# Technical tutorials and case studies
+
+Automation, integrations, accounting systems, document processing, open-source tooling, and systems engineering.
+
+${tutorials}
+`)
+	: null;
+
+if (markdownPage) return markdownPage;
 ---
 
 <Base

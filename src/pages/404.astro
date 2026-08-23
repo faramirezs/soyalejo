@@ -1,5 +1,24 @@
 ---
 import Base from "../layouts/Base.astro";
+import { markdownResponse } from "../lib/markdown";
+
+const markdown = `# Page not found
+
+The requested page does not exist on Alejandro Ramírez's portfolio.
+
+## Where to look next
+
+- [Home](https://soyalejo.com/): Professional summary and selected work.
+- [Technical tutorials](https://soyalejo.com/work): Automation, accounting, integration, and open-source work.
+- [About](https://soyalejo.com/about): Background, methods, and current focus.
+- [Contact](https://soyalejo.com/contact): Professional contact details.
+- [Agent guide](https://soyalejo.com/llms.txt): When to use this site and which pages answer specific questions.
+`;
+
+Astro.response.status = 404;
+
+const markdownPage = Astro.locals.prefersMarkdown ? markdownResponse(markdown, 404) : null;
+if (markdownPage) return markdownPage;
 ---
 
 <Base title="Page not found">
@@ -7,9 +26,14 @@ import Base from "../layouts/Base.astro";
 		<span class="not-found-code">404</span>
 		<h1>Page not found</h1>
 		<p>The page you're looking for doesn't exist or has been moved.</p>
+		<p class="not-found-help">
+			Use the <a href="/work">technical tutorials</a>, <a href="/about">about page</a>,
+			<a href="/contact">contact page</a>, or the <a href="/llms.txt">agent guide</a> to find
+			the right information.
+		</p>
 		<div class="not-found-links">
 			<a href="/" class="link-primary">Go home</a>
-			<a href="/work" class="link-secondary">View our work</a>
+			<a href="/work" class="link-secondary">View technical tutorials</a>
 		</div>
 	</div>
 </Base>
@@ -43,6 +67,11 @@ import Base from "../layouts/Base.astro";
 	.not-found p {
 		color: var(--color-muted);
 		margin-bottom: var(--spacing-2xl);
+	}
+
+	.not-found-help {
+		max-width: 38rem;
+		margin-inline: auto;
 	}
 
 	.not-found-links {
