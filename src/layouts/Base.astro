@@ -25,6 +25,43 @@ const siteLogo = (settings?.logo as any)?.url ? settings.logo as
 const menu = await getMenu("primary");
 const isHomePage = Astro.url.pathname === "/";
 const navigationItems = menu?.items.filter((item) => item.url !== "/about") ?? [];
+const siteUrl = Astro.site || new URL("https://soyalejo.com");
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const socialImage = new URL(
+	image || "/images/jurisdata/search-performance.jpg",
+	siteUrl,
+).href;
+const personSchema = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: "Alejandro Ramírez",
+	url: "https://soyalejo.com/",
+	description:
+		"Automation and Integrations Engineer who builds reliable, traceable systems for operations, accounting, documents, and data.",
+	jobTitle: "Automation & Integrations Engineer",
+	email: "mailto:faramirezs@gmail.com",
+	address: {
+		"@type": "PostalAddress",
+		addressLocality: "Berlin",
+		addressCountry: "DE",
+	},
+	contactPoint: {
+		"@type": "ContactPoint",
+		email: "faramirezs@gmail.com",
+		contactType: "professional inquiries",
+	},
+	sameAs: [
+		"https://github.com/faramirezs",
+		"https://www.linkedin.com/in/alejandro-mlops-engineer/",
+	],
+	knowsAbout: [
+		"API integrations",
+		"Workflow automation",
+		"Accounting systems",
+		"Document processing",
+		"Backend systems",
+	],
+};
 
 const pageCtx = createPublicPageContext({
 	Astro,
@@ -33,9 +70,9 @@ const pageCtx = createPublicPageContext({
 	title: fullTitle,
 	pageTitle: title ?? siteTitle,
 	description: description || siteDescription,
-	canonical: Astro.url.href,
-	image,
-	seo: { ogImage: image },
+	canonical: canonicalUrl,
+	image: socialImage,
+	seo: { ogImage: socialImage },
 	siteName: siteTitle,
 });
 ---
@@ -47,6 +84,9 @@ const pageCtx = createPublicPageContext({
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{fullTitle}</title>
 		<EmDashHead page={pageCtx} />
+		{isHomePage && (
+			<script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+		)}
 		<Font cssVariable="--font-app" preload />
 		<link
 			rel="alternate"
@@ -54,6 +94,7 @@ const pageCtx = createPublicPageContext({
 			title={`${siteTitle} RSS Feed`}
 			href="/rss.xml"
 		/>
+		<link rel="describedby" href="/llms.txt" />
 		<script is:inline>
 			// Apply an explicit saved choice before paint. Without one, the
 			// default :root light palette is used.
@@ -125,7 +166,9 @@ const pageCtx = createPublicPageContext({
 				</div>
 				<nav class="footer-links" aria-label="Footer navigation">
 					<a href="/work">Case studies</a>
+					<a href="/about">About</a>
 					<a href="/contact">Contact</a>
+					<a href="/privacy">Privacy</a>
 					<a href="https://github.com/faramirezs" target="_blank" rel="noopener noreferrer">
 						GitHub
 					</a>

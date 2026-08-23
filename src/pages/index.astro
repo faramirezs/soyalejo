@@ -1,5 +1,32 @@
 ---
 import Base from "../layouts/Base.astro";
+import { markdownResponse } from "../lib/markdown";
+
+const markdown = `# Alejandro Ramírez
+
+Automation and Integrations Engineer based in Berlin. I turn repeated manual operations and fragile toolchains into reliable, traceable systems.
+
+I build API integrations, workflow automation, document processing, accounting systems, data pipelines, internal tools, and backend services. My day-to-day toolkit includes n8n, Make, Python, SQL, Docker, APIs, and Unix systems.
+
+## Selected technical tutorials
+
+- [Fail-closed SumUp to Lexware accounting](https://soyalejo.com/work/sumup-lexware-fail-closed): Reconcile a business day before creating financial records.
+- [Idempotent supplier PDF ingestion](https://soyalejo.com/work/hamberger-invoices-lexware): Parse German supplier invoices, preserve tax buckets, and attach source evidence.
+- [Payout evidence attachment](https://soyalejo.com/work/payout-evidence-attachments): Match a payout PDF to the correct voucher without hiding ambiguity.
+- [Public-record intake](https://soyalejo.com/work/jurisdata-ticket-intake): Retrieve structured public data, route approved guidance, and keep retries duplicate-safe.
+- [hamberger-dl](https://soyalejo.com/work/hamberger-dl): An open-source CLI for supplier invoice retrieval with OIDC, filters, ZIP export, and safe re-runs.
+
+## Background
+
+At Ko Kitchen, I build accounting, invoice, and operations automation. Before that, I co-founded JurisDATA, where an automated intake and guidance workflow helped more than 50,000 people. At 42 Berlin, I studied C, C++, Unix, networking, concurrency, and systems programming.
+
+## Contact
+
+For Automation and Integrations Engineer, Business Systems Engineer, Internal Tools Engineer, or Backend and Integrations Engineer roles, email [faramirezs@gmail.com](mailto:faramirezs@gmail.com). See [GitHub](https://github.com/faramirezs) and [LinkedIn](https://www.linkedin.com/in/alejandro-mlops-engineer/).
+`;
+
+const markdownPage = Astro.locals.prefersMarkdown ? markdownResponse(markdown) : null;
+if (markdownPage) return markdownPage;
 ---
 
 <Base>
@@ -15,6 +42,8 @@ import Base from "../layouts/Base.astro";
 			I love turning repetitive work, manual coordination, and fragile processes into
 			automations people can actually rely on.
 		</p>
+
+		<h2>Current work</h2>
 
 		<p>
 			Currently, I work at <strong>Ko Kitchen</strong>, where I own several accounting and
@@ -43,6 +72,8 @@ import Base from "../layouts/Base.astro";
 			that automatically attaches the correct supporting documents to each voucher.
 		</p>
 
+		<h2>Earlier work</h2>
+
 		<p>
 			Before that, I co-founded <strong>JurisDATA</strong>, where I built an automated intake
 			and guidance platform that made a complicated legal process easier to navigate. It
@@ -50,6 +81,8 @@ import Base from "../layouts/Base.astro";
 			<a href="https://soyalejo.com/work/jurisdata-ticket-intake">public case study</a>{" "}
 			explains the architecture behind it.
 		</p>
+
+		<h2>Open-source work</h2>
 
 		<p>
 			I also enjoy building tools that other people can use.{" "}
@@ -66,6 +99,8 @@ import Base from "../layouts/Base.astro";
 			</a>.
 		</p>
 
+		<h2>Technical foundations</h2>
+
 		<p>
 			My day-to-day toolkit includes n8n, Make, Python, APIs, SQL, Docker, data pipelines,
 			and backend systems. But my foundation goes deeper than low-code.
@@ -77,6 +112,8 @@ import Base from "../layouts/Base.astro";
 			systems programming. That engineering mindset helps me adapt quickly, work across the
 			stack, and step into whichever part of a system needs attention.
 		</p>
+
+		<h2>How I work</h2>
 
 		<p>
 			I’m at my best when a process is unclear, repetitive, or fragile. I find what is
@@ -106,6 +143,15 @@ import Base from "../layouts/Base.astro";
 		font-weight: 400;
 		letter-spacing: normal;
 		line-height: inherit;
+	}
+
+	h2 {
+		margin: var(--spacing-2xl) 0 var(--spacing-md);
+		font: inherit;
+		font-size: 0.9em;
+		font-weight: 700;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
 	}
 
 	p {

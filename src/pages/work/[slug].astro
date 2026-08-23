@@ -3,20 +3,38 @@ import { getEmDashEntry, getEmDashCollection, decodeSlug } from "emdash";
 import { Image, PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
+import { markdownResponse, portableTextToMarkdown } from "../../lib/markdown";
 
 const slug = decodeSlug(Astro.params.slug);
-
 if (!slug) {
-	return Astro.redirect("/404");
+	Astro.response.status = 404;
+	return Astro.rewrite("/404");
 }
 
 const { entry: project, cacheHint } = await getEmDashEntry("projects", slug);
-
 if (!project) {
-	return Astro.redirect("/404");
+	Astro.response.status = 404;
+	return Astro.rewrite("/404");
 }
 
 if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+const metadata = [project.data.client, project.data.year].filter(Boolean).join(", ");
+const publicReference = project.data.url
+	? `\n\n## Public reference\n\n[Open public reference](${project.data.url})`
+	: "";
+const markdownPage = Astro.locals.prefersMarkdown
+	? markdownResponse(`# ${project.data.title}
+
+${project.data.summary || ""}
+
+${metadata ? `Context: ${metadata}.` : ""}
+
+${portableTextToMarkdown(project.data.content)}${publicReference}
+`)
+	: null;
+
+if (markdownPage) return markdownPage;
 
 // Related projects: order by date in the DB and request a small lookahead
 // so we can drop the current entry without re-querying. Avoids loading

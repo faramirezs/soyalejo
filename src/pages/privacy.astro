@@ -1,0 +1,152 @@
+---
+import Base from "../layouts/Base.astro";
+import { markdownResponse } from "../lib/markdown";
+
+const markdown = `# Privacy
+
+This personal portfolio is operated by Alejandro Ramírez. It describes professional work, technical tutorials, and public contact details. It does not provide user accounts, payments, a newsletter, public comments, or a contact form.
+
+## Information this site stores
+
+The website stores a \`theme\` cookie only when you choose light or dark mode. The cookie remembers that display choice for up to one year. It is limited to this site and is not used for advertising, profiling, or cross-site tracking. The application code does not include analytics or advertising scripts.
+
+## Email and external links
+
+The contact links open your email application so you can email Alejandro directly. The message and any information you include are handled by your email provider and the recipient's email provider. GitHub and LinkedIn links are external services. Their privacy practices apply after you visit them.
+
+## Technical processing
+
+The hosting provider and network services that deliver this website can process standard technical request data, such as IP address, browser headers, requested URL, and access time, to deliver and secure the service. Alejandro does not use that data to sell advertising, build marketing profiles, or make automated decisions about visitors.
+
+## Questions and changes
+
+For questions about this policy or a request related to an email you sent, contact [faramirezs@gmail.com](mailto:faramirezs@gmail.com). This page describes the current application behavior. It is not legal advice and may change when the website adds a feature that processes personal data.
+`;
+
+const markdownPage = Astro.locals.prefersMarkdown ? markdownResponse(markdown) : null;
+if (markdownPage) return markdownPage;
+---
+
+<Base
+	title="Privacy"
+	description="Privacy information for the Alejandro Ramírez portfolio, including theme cookies, contact links, and technical request processing."
+>
+	<article class="information-page">
+		<header class="information-header">
+			<h1>Privacy</h1>
+			<p>
+				This personal portfolio is operated by Alejandro Ramírez. It describes professional work,
+				technical tutorials, and public contact details.
+			</p>
+		</header>
+
+		<section>
+			<h2>Information this site stores</h2>
+			<p>
+				The website stores a <code>theme</code> cookie only when you choose light or dark mode.
+				The cookie remembers that display choice for up to one year. It is limited to this site and
+				is not used for advertising, profiling, or cross-site tracking.
+			</p>
+			<p>
+				The application code does not include analytics or advertising scripts. The site does not
+				provide user accounts, payments, a newsletter, public comments, or a contact form.
+			</p>
+		</section>
+
+		<section>
+			<h2>Email and external links</h2>
+			<p>
+				The contact links open your email application so you can email Alejandro directly. The
+				message and any information you include are handled by your email provider and the
+				recipient's email provider.
+			</p>
+			<p>
+				GitHub and LinkedIn links are external services. Their privacy practices apply after you
+				visit them.
+			</p>
+		</section>
+
+		<section>
+			<h2>Technical processing</h2>
+			<p>
+				The hosting provider and network services that deliver this website can process standard
+				technical request data, such as IP address, browser headers, requested URL, and access
+				time, to deliver and secure the service.
+			</p>
+			<p>
+				Alejandro does not use that data to sell advertising, build marketing profiles, or make
+				automated decisions about visitors.
+			</p>
+		</section>
+
+		<section>
+			<h2>Questions and changes</h2>
+			<p>
+				For questions about this policy or a request related to an email you sent, contact
+				<a href="mailto:faramirezs@gmail.com">faramirezs@gmail.com</a>. This page describes the
+				current application behavior. It is not legal advice and may change when the website adds
+				a feature that processes personal data.
+			</p>
+		</section>
+	</article>
+</Base>
+
+<style>
+	.information-page {
+		max-width: 52rem;
+		margin: 0 auto;
+		padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-4xl);
+		font-size: var(--font-size-base);
+		line-height: var(--leading-relaxed);
+	}
+
+	.information-header {
+		padding-bottom: var(--spacing-2xl);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	h1,
+	h2 {
+		font-family: var(--font-body);
+		font-weight: 700;
+		letter-spacing: var(--tracking-tight);
+	}
+
+	h1 {
+		font-size: var(--font-size-4xl);
+		line-height: var(--leading-tight);
+		margin-bottom: var(--spacing-lg);
+	}
+
+	h2 {
+		font-size: var(--font-size-xl);
+		margin: var(--spacing-2xl) 0 var(--spacing-md);
+	}
+
+	p {
+		margin-bottom: var(--spacing-lg);
+	}
+
+	.information-header p {
+		font-size: var(--font-size-lg);
+		line-height: var(--leading-normal);
+		color: var(--color-muted);
+		margin-bottom: 0;
+	}
+
+	code {
+		font-family: var(--font-app);
+		font-size: 0.9em;
+	}
+
+	a {
+		color: var(--color-brand);
+		text-underline-offset: 0.2em;
+	}
+
+	@media (max-width: 768px) {
+		h1 {
+			font-size: var(--font-size-3xl);
+		}
+	}
+</style>

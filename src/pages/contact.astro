@@ -1,5 +1,20 @@
 ---
 import Base from "../layouts/Base.astro";
+import { markdownResponse } from "../lib/markdown";
+
+const markdown = `# Contact Alejandro Ramírez
+
+Alejandro Ramírez is an Automation and Integrations Engineer in Berlin. Contact him about Automation and Integrations Engineer, Business Systems Engineer, Internal Tools Engineer, and Backend and Integrations Engineer roles.
+
+He is most useful when a team needs to connect systems, remove repeated operational work, make accounting or document processes safer, build an internal tool, or improve an API and data workflow. He works from diagnosis through design, implementation, verification, and handoff. The relevant technical evidence is available in the portfolio tutorials.
+
+Email [faramirezs@gmail.com](mailto:faramirezs@gmail.com) with the operating problem, systems involved, team context, and expected outcome. This makes it easier to identify whether the work is a good fit. GitHub and LinkedIn are also available for public professional references.
+
+Location: Berlin, Germany.
+`;
+
+const markdownPage = Astro.locals.prefersMarkdown ? markdownResponse(markdown) : null;
+if (markdownPage) return markdownPage;
 ---
 
 <Base
@@ -15,6 +30,24 @@ import Base from "../layouts/Base.astro";
 			</p>
 			<a class="contact-cta" href="mailto:faramirezs@gmail.com">Email Alejandro →</a>
 		</header>
+
+		<section class="contact-context" aria-labelledby="contact-context-title">
+			<h2 id="contact-context-title">Best fit</h2>
+			<p>
+				I am most useful when a team needs to connect systems, remove repeated operational
+				work, make accounting or document processes safer, build an internal tool, or improve
+				an API and data workflow.
+			</p>
+			<p>
+				I work from diagnosis through design, implementation, verification, and handoff. The
+				technical tutorials on this site show how I approach idempotency, evidence, failure
+				states, and controlled writes in production workflows.
+			</p>
+			<p>
+				Email me with the operating problem, systems involved, team context, and expected
+				outcome. This makes it easier to identify whether the work is a good fit.
+			</p>
+		</section>
 
 		<aside class="contact-info" aria-label="Contact details">
 			<div class="info-section">
@@ -74,6 +107,25 @@ import Base from "../layouts/Base.astro";
 		text-underline-offset: 0.2em;
 	}
 
+
+	.contact-context {
+		padding: var(--spacing-2xl) 0;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.contact-context h2 {
+		font-family: var(--font-body);
+		font-size: var(--font-size-xl);
+		font-weight: 700;
+		letter-spacing: var(--tracking-tight);
+		margin-bottom: var(--spacing-md);
+	}
+
+	.contact-context p {
+		max-width: 44rem;
+		margin-bottom: var(--spacing-lg);
+		line-height: var(--leading-relaxed);
+	}
 	.contact-info {
 		margin-top: var(--spacing-2xl);
 		border-top: 1px solid var(--color-border);
