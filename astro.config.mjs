@@ -12,6 +12,14 @@ export default defineConfig({
 	adapter: node({
 		mode: "standalone",
 	}),
+	server: {
+		host: true,
+	},
+	vite: {
+		server: {
+			allowedHosts: ["tulik-1", "tulik-1.tailf1b99f.ts.net"],
+		},
+	},
 	image: {
 		layout: "constrained",
 		responsiveStyles: true,
