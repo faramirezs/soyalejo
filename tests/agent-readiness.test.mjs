@@ -148,7 +148,8 @@ test("llms.txt is a structured root agent guide", async () => {
 	const body = await response.text();
 
 	assert.equal(response.status, 200);
-	assert.match(body, /^# Alejandro Ramírez\n\n> /);
+	assert.match(body, /## When to use this site/);
+	assert.match(body, /Use this site when/i);
 	assert.match(body, /Use this site when/i);
 	assert.match(body, /\[Home\]\(https:\/\/soyalejo\.com\/\)/);
 	assert.match(body, /\[About\]\(https:\/\/soyalejo\.com\/about\)/);

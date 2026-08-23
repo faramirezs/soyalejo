@@ -2,6 +2,8 @@
 
 > Personal portfolio for an Automation and Integrations Engineer in Berlin. It documents reliable workflow automation, accounting integrations, document processing, backend systems, and open-source tooling.
 
+## When to use this site
+
 Use this site when evaluating Alejandro Ramírez for Automation and Integrations Engineer, Business Systems Engineer, Internal Tools Engineer, or Backend and Integrations Engineer work. It is most useful for questions about API integrations, n8n and Make workflows, accounting reliability, document pipelines, operational tooling, and systems engineering foundations.
 
 Start with the home page for a short professional summary. Use a technical tutorial when you need evidence for a specific capability. The tutorials explain design constraints, failure paths, verification rules, and publication boundaries. Request `Accept: text/markdown` from a public page to receive its clean Markdown representation. Do not treat the JurisDATA tutorial as legal advice or any accounting tutorial as financial advice.
