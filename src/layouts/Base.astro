@@ -24,6 +24,7 @@ const siteLogo = (settings?.logo as any)?.url ? settings.logo as
 
 const menu = await getMenu("primary");
 const isHomePage = Astro.url.pathname === "/";
+const isGermanHome = isHomePage && Astro.url.searchParams.get("lang") === "de";
 const navigationItems = menu?.items.filter((item) => item.url !== "/about") ?? [];
 const siteUrl = Astro.site || new URL("https://soyalejo.com");
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
@@ -78,7 +79,7 @@ const pageCtx = createPublicPageContext({
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={isGermanHome ? "de" : "en"}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -118,10 +119,17 @@ const pageCtx = createPublicPageContext({
 		<header class:list={{ "site-header": true, "home-header": isHomePage }}>
 			{
 				isHomePage ? (
-					<div class="home-theme-control">
-						<button type="button" class="theme-toggle" aria-label="Switch to dark theme">
-							Dark
-						</button>
+					<div class="home-tools">
+						<nav class="lang-toggle" aria-label="Language">
+							<a href="/" class:list={{ active: !isGermanHome }}>EN</a>
+							<span aria-hidden="true">/</span>
+							<a href="/?lang=de" class:list={{ active: isGermanHome }}>DE</a>
+						</nav>
+						<div class="home-theme-control">
+							<button type="button" class="theme-toggle" aria-label="Switch to dark theme">
+								Dark
+							</button>
+						</div>
 					</div>
 				) : (
 					<nav class="nav" aria-label="Primary navigation">
@@ -426,6 +434,36 @@ const pageCtx = createPublicPageContext({
 			.paper-shell .home-theme-control {
 				display: flex;
 				justify-content: flex-end;
+			}
+			.home-tools {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.lang-toggle {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5em;
+				padding: 0.35em 0.75em;
+				border: 1px solid var(--color-border);
+				border-radius: var(--radius);
+				background: var(--color-surface);
+				font-size: var(--font-size-sm);
+			}
+
+			.lang-toggle a {
+				color: var(--color-muted);
+				text-decoration: none;
+			}
+
+			.lang-toggle a:hover {
+				color: var(--color-brand);
+			}
+
+			.lang-toggle a.active {
+				color: var(--color-text);
+				font-weight: 600;
 			}
 
 			.paper-shell .nav {
