@@ -16,6 +16,7 @@
       "label": "Case Studies",
       "labelSingular": "Case Study",
       "supports": ["drafts", "revisions", "search", "seo"],
+      "urlPattern": "/work/{slug}",
       "fields": [
         { "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
         { "slug": "featured_image", "label": "Featured Image", "type": "image", "required": true },
