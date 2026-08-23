@@ -32,7 +32,15 @@ if (markdownPage) return markdownPage;
 <Base>
 	<article class="narrative">
 		<h1>
-			Hi, I’m <strong>Alejandro Ramírez</strong>, an{" "}
+			Hi, I’m{" "}
+			<img
+				class="avatar"
+				src="/favicon.jpg"
+				alt=""
+				width="1024"
+				height="1024"
+			/>{" "}
+			<strong>Alejandro Ramírez</strong>, an{" "}
 			<strong>Automation &amp; Integrations Engineer</strong> based in Berlin.
 		</h1>
 
@@ -143,6 +151,14 @@ if (markdownPage) return markdownPage;
 		font-weight: 400;
 		letter-spacing: normal;
 		line-height: inherit;
+	}
+	.avatar {
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 50%;
+		object-fit: cover;
+		vertical-align: -0.35em;
+		margin-right: 0.1em;
 	}
 
 	h2 {
