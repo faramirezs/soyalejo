@@ -55,18 +55,24 @@ jobs:
           ssh -o BatchMode=yes "$DEPLOY_USER@$DEPLOY_HOST" '
             set -eu
             cd /opt/soyalejo
+            previous_revision="$(git rev-parse HEAD)"
             git fetch origin main
             git reset --hard origin/main
             docker build --tag soyalejo:latest .
             touch /opt/soyalejo/runtime/data.db-wal /opt/soyalejo/runtime/data.db-shm
-            # The production CMS database is authoritative after initial seeding.
+            # Preserve CMS edits unless the repository seed itself changed.
+            if git diff --quiet "$previous_revision" HEAD -- seed/seed.json; then
+              seed_conflict=skip
+            else
+              seed_conflict=update
+            fi
             docker stop soyalejo || true
             if ! docker run --rm \
               -v /opt/soyalejo/runtime/data.db:/app/data.db \
               -v /opt/soyalejo/runtime/data.db-wal:/app/data.db-wal \
               -v /opt/soyalejo/runtime/data.db-shm:/app/data.db-shm \
               -v /opt/soyalejo/runtime/uploads:/app/uploads \
-              soyalejo:latest npx emdash seed seed/seed.json --on-conflict skip; then
+              soyalejo:latest npx emdash seed seed/seed.json --on-conflict "$seed_conflict"; then
               docker start soyalejo || true
               exit 1
             fi
