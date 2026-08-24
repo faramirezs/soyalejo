@@ -27,10 +27,122 @@ For Automation and Integrations Engineer, Business Systems Engineer, Internal To
 
 const markdownPage = Astro.locals.prefersMarkdown ? markdownResponse(markdown) : null;
 if (markdownPage) return markdownPage;
+const isGerman = Astro.url.searchParams.get("lang") === "de";
 ---
 
 <Base>
 	<article class="narrative">
+		{isGerman && (
+			<h1>
+				Hi, ich bin{" "}
+				<img
+					class="avatar"
+					src="/favicon.jpg"
+					alt=""
+					width="1024"
+					height="1024"
+				/>{" "}
+				<strong>Alejandro Ramírez</strong>,{" "}
+				<strong>Automation- &amp; Integrations-Engineer</strong> aus Berlin.
+			</h1>
+
+			<p>Ich baue Systeme, die Reibung aus dem Weg räumen.</p>
+
+			<p>
+				Ich liebe es, sich wiederholende Arbeit, manuelle Koordination und fragile
+				Prozesse in Automatisierungen zu verwandeln, auf die man sich wirklich verlassen
+				kann.
+			</p>
+
+			<h2>Aktuelle Arbeit</h2>
+
+			<p>
+				Derzeit arbeite ich bei <strong>Ko Kitchen</strong>, wo ich mehrere Buchhaltungs-
+				und Dokumentautomatisierungen verantworte.
+			</p>
+
+			<p>
+				Ich habe einen{" "}
+				<a href="https://soyalejo.com/work/sumup-lexware-fail-closed">
+					Verkaufsbuchhaltungs-Workflow
+				</a>{" "}
+				gebaut, der Daten von SumUp nach Lexware überträgt und alles Unklare zur Prüfung
+				markiert.
+			</p>
+
+			<p>
+				Außerdem habe ich eine{" "}
+				<a href="https://soyalejo.com/work/hamberger-invoices-lexware">
+					Lieferantenrechnungs-Pipeline
+				</a>{" "}
+				entwickelt, die PDFs ohne Duplikate in Buchhaltungsdatensätze verwandelt.
+			</p>
+
+			<p>
+				Ich habe einen{" "}
+				<a href="https://soyalejo.com/work/payout-evidence-attachments">
+					Dokument-Workflow
+				</a>{" "}
+				gebaut, der automatisch die richtigen Belege an jeden Buchungsvorgang anhängt.
+			</p>
+
+			<h2>Frühere Arbeit</h2>
+
+			<p>
+				Davor habe ich <strong>JurisDATA</strong> mitgegründet, wo ich eine automatisierte
+				Intake- und Beratungsplattform gebaut habe, die einen komplizierten Rechtsprozess
+				leichter navigierbar machte. Sie hat mehr als <strong>50.000 Menschen</strong>{" "}
+				geholfen. Die{" "}
+				<a href="https://soyalejo.com/work/jurisdata-ticket-intake">öffentliche Case Study</a>{" "}
+				erklärt die Architektur dahinter.
+			</p>
+
+			<h2>Open-Source-Arbeit</h2>
+
+			<p>
+				Ich baue außerdem gerne Werkzeuge, die andere nutzen können.{" "}
+				<a href="https://github.com/faramirezs/hamberger-dl">hamberger-dl</a>{" "}ist ein
+				Kommandozeilen-Tool zum Herunterladen und Organisieren von Lieferantendokumenten –
+				mit sicherem Login, Filtern, ZIP-Exporten und sicheren Wiederholungsläufen.
+			</p>
+
+			<p>
+				Im Open-Source-Bereich habe ich einen Rust-Worker für Streaming-Antworten von
+				LLM-Anbietern zu iii beigetragen. Die Arbeit wurde{" "}
+				<a href="https://github.com/iii-hq/workers/pull/690">
+					reviewed, freigegeben und gemerged
+				</a>.
+			</p>
+
+			<h2>Technische Grundlagen</h2>
+
+			<p>
+				Zu meinem täglichen Werkzeugkasten gehören n8n, Make, Python, APIs, SQL, Docker,
+				Datenpipelines und Backend-Systeme. Aber meine Grundlage geht tiefer als Low-Code.
+			</p>
+
+			<p>
+				An der <strong>42 Berlin</strong>, einer intensiven Peer-to-Peer-Schule, die für
+				ihren anspruchsvollen, Low-Level-orientierten Ansatz bekannt ist, habe ich C, C++,
+				Unix, Netzwerke, Nebenläufigkeit und Systemprogrammierung studiert. Diese
+				Ingenieursmentalität hilft mir, mich schnell anzupassen, über den gesamten Stack zu
+				arbeiten und in jeden Teil eines Systems einzusteigen, der Aufmerksamkeit braucht.
+			</p>
+
+			<h2>Wie ich arbeite</h2>
+
+			<p>
+				Ich bin am besten, wenn ein Prozess unklar, sich wiederholend oder fragil ist. Ich
+				finde heraus, was bricht, übernehme die Verantwortung für die Integration und
+				liefere etwas, auf das man sich verlassen kann.
+			</p>
+
+			<p class="contact">
+				Du findest mich auf{" "}<a href="https://github.com/faramirezs">GitHub</a>{" "}und{" "}
+				<a href="https://www.linkedin.com/in/alejandro-mlops-engineer/">LinkedIn</a>.
+			</p>
+		)}
+		{!isGerman && (
 		<h1>
 			Hi, I’m{" "}
 			<img
@@ -132,6 +244,7 @@ if (markdownPage) return markdownPage;
 			Find me on{" "}<a href="https://github.com/faramirezs">GitHub</a>{" "}and{" "}
 			<a href="https://www.linkedin.com/in/alejandro-mlops-engineer/">LinkedIn</a>.
 		</p>
+		)}
 	</article>
 </Base>
 
