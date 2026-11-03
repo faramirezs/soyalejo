@@ -52,9 +52,18 @@ The image seeds at build time because `astro build` requires `data.db` to exist 
 
 If a deploy ever needs to intentionally write seed content into production, do it as a separate, explicit, manual operation against a backup.
 
-## Known emdash 0.30 bugs
+## Core migrations
 
-`--no-content` and `--skip-media` are documented but ignored by the CLI (citty parses `--no-content` as negating a `content` flag). Do not rely on them. `--on-conflict` works and is what this repository depends on.
+Since 1.4.0 the site runs 90 core migrations. `astro dev` and the seed command apply pending ones automatically. To check or apply them explicitly:
+
+```bash
+npx emdash migrate --status
+npx emdash migrate
+```
+
+`npx emdash migrate --check` verifies a deployed database against the built artifact (`.emdash/migrations.json`). Migrations have no working rollback: restore the pre-migration `data.db` file instead.
+
+`npx emdash dev` no longer exists — use `npx astro dev`.
 
 ## Rollback
 
