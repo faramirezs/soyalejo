@@ -26,3 +26,6 @@ npm-debug.log*
 data.db-wal
 data.db-shm
 data.db.bak*
+
+# emdash upgrade work order (transient; migrations.json stays tracked)
+.emdash/UPGRADE.md
