@@ -28,7 +28,7 @@ Start with the home page for a short professional summary. Use a technical tutor
 ## External references
 
 - [GitHub](https://github.com/faramirezs): Public code and open-source activity.
-- [LinkedIn](https://www.linkedin.com/in/alejandro-mlops-engineer/): Professional profile.
+- [LinkedIn](https://www.linkedin.com/in/alejandro-ramirez-automation/): Professional profile.
 
 ## Optional
 
