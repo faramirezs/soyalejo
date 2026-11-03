@@ -55,17 +55,14 @@ jobs:
           ssh -o BatchMode=yes "$DEPLOY_USER@$DEPLOY_HOST" '
             set -eu
             cd /opt/soyalejo
-            previous_revision="$(git rev-parse HEAD)"
             git fetch origin main
             git reset --hard origin/main
             docker build --tag soyalejo:latest .
             touch /opt/soyalejo/runtime/data.db-wal /opt/soyalejo/runtime/data.db-shm
-            # Preserve CMS edits unless the repository seed itself changed.
-            if git diff --quiet "$previous_revision" HEAD -- seed/seed.json; then
-              seed_conflict=skip
-            else
-              seed_conflict=update
-            fi
+            # Never overwrite content edited in the admin. The admin database is
+            # the source of truth for content; seed/seed.json only creates what is
+            # missing (schema, first-time fixtures). See PUBLISHING.md.
+            seed_conflict=skip
             docker stop soyalejo || true
             if ! docker run --rm \
               -v /opt/soyalejo/runtime/data.db:/app/data.db \

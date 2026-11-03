@@ -19,7 +19,9 @@ npm run bootstrap
 npm run dev
 ```
 
-`npm run bootstrap` applies `seed/seed.json` to the local SQLite database and downloads the seed cover images. Run it for a new or intentionally reset database. Start the site at `http://localhost:4321`.
+`npm run bootstrap` applies `seed/seed.json` to the local SQLite database with `--on-conflict skip`: it creates missing records and never overwrites ones you already have. Run it for a new database or after adding schema to the seed. Pull local content back into the seed with `npx emdash export-seed --with-content=all > seed/seed.json`. Start the site at `http://localhost:4321`.
+
+See [PUBLISHING.md](PUBLISHING.md) for what to edit in the admin UI versus the repository.
 
 ## Verification
 
@@ -33,7 +35,7 @@ npm run build
 - Astro + EmDash CMS
 - Node.js server adapter
 - SQLite and local media storage
-- Seeded CMS content in `seed/seed.json`
+- Seeded CMS schema and fixtures in `seed/seed.json`; live content lives in the admin database
 
 ## Publication boundary
 

@@ -6,7 +6,12 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . ./
-RUN npm run bootstrap && npm run build && rm -f data.db-shm data.db-wal
+# The image needs data.db to exist for the COPY below, so it is seeded at build
+# time. --on-conflict skip means it never touches content: production content
+# lives in the mounted runtime database. See PUBLISHING.md.
+RUN npm run bootstrap \
+ && npm run build \
+ && rm -f data.db-shm data.db-wal
 
 FROM node:22-bookworm-slim
 

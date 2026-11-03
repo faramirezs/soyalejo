@@ -8,7 +8,7 @@
     "seed": "seed/seed.json"
   },
   "scripts": {
-    "bootstrap": "emdash seed seed/seed.json --on-conflict update",
+    "bootstrap": "emdash seed seed/seed.json --on-conflict skip",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
