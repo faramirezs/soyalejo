@@ -64,6 +64,15 @@ jobs:
             # missing (schema, first-time fixtures). See PUBLISHING.md.
             seed_conflict=skip
             docker stop soyalejo || true
+            # The seed command applies pending core migrations, and those have no
+            # working rollback. Snapshot the live database (all three SQLite files)
+            # first and keep the three most recent snapshots. See PUBLISHING.md.
+            backup_dir=/opt/soyalejo/runtime/backups
+            backup_stamp=$(date -u +%Y%m%dT%H%M%SZ)
+            mkdir -p "$backup_dir/$backup_stamp"
+            cp /opt/soyalejo/runtime/data.db /opt/soyalejo/runtime/data.db-wal \
+               /opt/soyalejo/runtime/data.db-shm "$backup_dir/$backup_stamp/"
+            ls -1dt "$backup_dir"/*/ | tail -n +4 | xargs -r rm -rf
             if ! docker run --rm \
               -v /opt/soyalejo/runtime/data.db:/app/data.db \
               -v /opt/soyalejo/runtime/data.db-wal:/app/data.db-wal \

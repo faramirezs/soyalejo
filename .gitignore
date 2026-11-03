@@ -21,3 +21,8 @@ npm-debug.log*
 
 # macOS
 .DS_Store
+
+# sqlite sidecars (never commit: a stale WAL corrupts data.db)
+data.db-wal
+data.db-shm
+data.db.bak*
